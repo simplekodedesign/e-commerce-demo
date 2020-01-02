@@ -1,0 +1,3 @@
+{
+	"presets": ["@react/preset-env","@babel/preset-react"]
+}
