@@ -1,0 +1,10 @@
+//dependencias
+npm i express morgan mongoose jsonwebtoken bcryptjs dotenv express-fileupload
+
+//dependencias de desarrollo
+npm i nodemon webpack webpack-cli react react-dom @babel/core babel-loader @babel/preset-react @babel/preset-env -D
+
+//scripts
+npm start //arranca la aplicacion con node
+npm run dev //arranca la aplicacion en desarrollo con nodemon
+npm run webpack //compila el react
