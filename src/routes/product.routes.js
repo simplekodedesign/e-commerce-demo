@@ -7,7 +7,7 @@ const Currency = require("../models/Currency")
 const Image = require("../models/Image")
 
 //registrar producto
-router.post("/add",async (req,res,next) => {
+router.post("/add",ensureAdmin,async (req,res,next) => {
 	const {name,description,quantity,price} = req.body
 	const images = req.files
 	let img
@@ -49,7 +49,7 @@ router.post("/add",async (req,res,next) => {
 router.get("/",show_products)
 
 //modificar producto
-router.post("/update",async (req,res,next) => {
+router.post("/update",ensureAdmin,async (req,res,next) => {
 	const {product_id,name,description,quantity,price} = req.body
 	const images = req.files
 
@@ -85,7 +85,7 @@ router.post("/update",async (req,res,next) => {
 },show_products)
 
 //eliminar productos
-router.post("/delete",async (req,res,next) => {
+router.post("/delete",ensureAdmin,async (req,res,next) => {
 	const {product_id} = req.body
 
 	await Image.remove({product_id})
@@ -136,7 +136,9 @@ async function show_products (req,res,next) {
 
 //validar que el usuario sea administrador
 function ensureAdmin(req,res,next){
-	const isAdmin = req.headers["isAdmin"]
+	console.log(req.headers)
+
+	const isAdmin = req.headers["is_admin"]
 	
 	if(!isAdmin)
 		res.json({
