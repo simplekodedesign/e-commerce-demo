@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname,"public")))
 
 /*------------ROUTES----------------*/
 app.use("/login",require("./routes/login.routes")) //Login
-app.use("/admin",require("./routes/admin.routes")) //rutas de administrador
+app.use("/admin",ensureToken,require("./routes/admin.routes")) //rutas de administrador
 
 
 //asegurarse de que haya creado un token
