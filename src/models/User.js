@@ -14,9 +14,8 @@ const userSchema = new Schema({
 		unique: true
 	},
 	admin: {
-		type: boolean,
+		type: Boolean,
 		required: true,
-		unique: true,
 		default: false
 	}
 })

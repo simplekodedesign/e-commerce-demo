@@ -20,7 +20,7 @@ app.use(express.json()) //establecer la forma en como se realiza el intercambio 
 app.use(express.static(path.join(__dirname,"public")))
 
 /*------------ROUTES----------------*/
-
+app.use("/login",require("./routes/login.routes")) //Login
 
 //arrancar el servidor
 app.listen(app.get("port"),() => {
