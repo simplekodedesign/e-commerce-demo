@@ -1,6 +1,6 @@
-const { Schema,model } = require("mongoose")
 
-//esquema de productos
+//esquema de prconst { Schema,model } = require("mongoose")
+oductos
 const productSchema = new Schema({
 	name: {
 		type: String,
@@ -19,9 +19,6 @@ const productSchema = new Schema({
 		type: Number,
 		required: true,
 		default: 0
-	},
-	img: {
-		type: String
 	}
 })
 

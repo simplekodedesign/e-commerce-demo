@@ -1,6 +1,6 @@
 const { Schema,model } = require("mongoose")
-const User = model("./User")
-const Product = model("./Product")
+const User = model("User")
+const Product = model("Product")
 
 //esquema de carrito de compra
 const carSchema = new Schema({
