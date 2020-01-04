@@ -11,6 +11,10 @@ const carSchema = new Schema({
 	product_id: {
 		type: Schema.ObjectId,
 		ref: "Product"
+	},
+	quantity: {
+		type: Number,
+		required: true
 	}
 })
 

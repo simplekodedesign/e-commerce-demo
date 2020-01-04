@@ -10,12 +10,25 @@ const Currency = require("../models/Currency")
 
 //añadir al carrito de compra
 router.post("/add",async (req,res, next) => {
-	const {product_id} = req.body
+	const {product_id,quantity} = req.body
 	const user_id = req.user_id
+
+	if(!product_id || !quantity)
+		return res.json({
+			status: -1,
+			message: "Debe Rellenar todos los campos"
+		})
+
+	if(!user_id)
+		return res.json({
+			status: -2,
+			message: "No ha iniciado sesion"
+		})
 
 	const car = new Car({
 		user_id,
-		product_id
+		product_id,
+		quantity
 	})
 
 	await car.save()
@@ -28,6 +41,18 @@ router.post("/delete",async (req,res, next) => {
 	const {product_id} = req.body
 	const user_id = req.user_id
 
+	if(!product_id)
+		return res.json({
+			status: -1,
+			message: "Se esperaba el id del producto"
+		})
+
+	if(!user_id)
+		return res.json({
+			status: -2,
+			message: "No ha iniciado sesion"
+		})
+
 	await Car.remove({
 		user_id,
 		product_id
@@ -39,6 +64,13 @@ router.post("/delete",async (req,res, next) => {
 //vaciar carrito de compra
 router.post("/empty",async (req,res) => {
 	const user_id = req.user_id
+
+	if(!user_id)
+		return res.json({
+			status: -2,
+			message: "No ha iniciado sesion"
+		})
+
 	await Car.remove({user_id})
 	res.json({
 		status: 1,
@@ -52,6 +84,13 @@ router.get("/",show_car)
 //mostrar los productos que tiene el usuario en el carrito de compra
 async function show_car (req,res) {
 	const user_id = req.user_id
+
+	if(!user_id)
+		return res.json({
+			status: -2,
+			message: "No ha iniciado sesion"
+		})
+	
 	const car = await Car.find({user_id})
 	const currency = await Currency.find()
 
@@ -73,11 +112,17 @@ async function show_car (req,res) {
 			})
 
 			prices = []
+
+			prices.push({
+				currency: "USD",
+				price: product.price * car[c].quantity
+			})
+
 			for(let i in currency){
 				if(currency.hasOwnProperty(i)){
 					prices.push({
 						currency: currency[i].currency,
-						price: currency[i].value * product.price 
+						price: currency[i].value * product.price * car[c].quantity
 					})
 				}
 			}
