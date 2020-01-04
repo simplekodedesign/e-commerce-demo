@@ -9,10 +9,6 @@ const salesSchema = new Schema({
 	date: {
 		type: String,
 		required: true
-	},
-	total: {
-		type: Number,
-		required: true
 	}
 })
 

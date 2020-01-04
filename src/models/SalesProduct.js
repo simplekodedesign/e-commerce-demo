@@ -4,7 +4,7 @@ const Sales = model("Sales")
 const salesproductSchema = new Schema({
 	sales_id: {
 		type: Schema.ObjectId,
-		refL "Sales" 
+		ref: "Sales" 
 	},
 	name: {
 		type: String,
