@@ -36,6 +36,16 @@ router.post("/delete",async (req,res, next) => {
 	next()
 },show_car)
 
+//vaciar carrito de compra
+router.post("/empty",async (req,res) => {
+	const user_id = req.user_id
+	await Car.remove({user_id})
+	res.json({
+		status: 1,
+		message: "Carrito vacio"
+	})
+})
+
 //mostrar los productos del carrio de compra
 router.get("/",show_car)
 
