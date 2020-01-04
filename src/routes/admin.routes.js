@@ -1,6 +1,7 @@
 const {Router} = require("express")
 const router = Router() //establecer router
 
+/*------------------------------ADMIN ROUTES-----------------------------------------------*/
 router.use("/currency",ensureAdmin,require("./currency.routes")) //controlar las monedas en las que se presenta el precio
 router.use("/product",require("./product.routes")) //controlar los productos
 

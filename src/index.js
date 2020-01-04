@@ -2,6 +2,7 @@ const express = require("express") //servidor
 const morgan = require("morgan") //ver peticiones en terminal
 const path = require("path")
 const fileUpload = require("express-fileupload") //subir archivos al servidor
+const jwt = require("jsonwebtoken")
 require("./database") //conexion a la base de datos
 
 //inicializar el servidor
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname,"public")))
 /*------------ROUTES----------------*/
 app.use("/login",require("./routes/login.routes")) //Login
 app.use("/admin",ensureToken,require("./routes/admin.routes")) //rutas de administrador
+app.use("/client",ensureToken,require("./routes/client.routes")) //rutas de clientes
 
 
 //asegurarse de que haya creado un token
@@ -33,6 +35,13 @@ function ensureToken(req,res,next){
 		const bearer = bearerHeader.split(" ")
 		const bearerToken = bearer[1]
 		req.token = bearerToken
+
+		//decifrar el token
+		const decoded = jwt.verify(req.token,process.env.SECRET_KEY)
+		
+		//guardar el id del usuario para compartirlo con las otras rutas
+		req.user_id = decoded.id
+		
 		next()
 	}else{
 		res.json({
