@@ -90,7 +90,7 @@ async function show_car (req,res) {
 			status: -2,
 			message: "No ha iniciado sesion"
 		})
-	
+
 	const car = await Car.find({user_id})
 	const currency = await Currency.find()
 
@@ -103,6 +103,10 @@ async function show_car (req,res) {
 		if(car.hasOwnProperty(c)){
 			product = await Product.findOne({
 				_id: car[c].product_id
+			},{
+				name: true,
+				description: true,
+				price: true
 			})
 
 			images = await Image.find({
@@ -129,6 +133,7 @@ async function show_car (req,res) {
 
 			response.push({
 				data: product,
+				quantity: car[c].quantity,
 				images,
 				prices
 			})
