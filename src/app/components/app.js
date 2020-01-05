@@ -1,12 +1,12 @@
-import React,{Component} from "react"
-import {render} from "react-dom"
+import React from 'react'
+import Header from './Header'
 
-class App extends Component{
-	render(){
-		return (
-			<h1>Funciona</h1>
-		)
-	}
+function App () {
+  return (
+    <main>
+      <Header />
+    </main>
+  )
 }
 
 export default App
