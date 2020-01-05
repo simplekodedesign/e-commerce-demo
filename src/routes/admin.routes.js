@@ -6,14 +6,28 @@ router.use("/currency",ensureAdmin,require("./currency.routes")) //controlar las
 router.use("/product",require("./product.routes")) //controlar los productos
 
 //validar que el usuario sea administrador
-function ensureAdmin(req,res,next){
-	console.log(req.headers)
+async function ensureAdmin(req,res,next){
+	const user_id = req.user_id
 
-	const isAdmin = req.headers["is_admin"]
-	
-	if(!isAdmin)
-		res.json({
+	if(!user_id)
+		return res.json({
 			status: -1,
+			message: "No ha iniciado sesion"
+		})
+	
+	const user = User.find({_id: user_id})
+
+	if(!user)
+		return res.json({
+			status: -2,
+			message: "No se encontro el usuario"
+		})
+
+	const isAdmin = user.admin
+
+	if(!isAdmin)
+		return res.json({
+			status: -3,
 			message: "No tienes acceso a esta ruta"
 		})
 
