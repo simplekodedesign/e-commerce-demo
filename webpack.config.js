@@ -10,7 +10,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({  
 		  filename: 'index.html',
-		  template: './src/public/index.html',
+		  template: './src/public/template/index.template.html',
 		  hash: true
 		}),
 		new MiniCSSExtractPlugin({
