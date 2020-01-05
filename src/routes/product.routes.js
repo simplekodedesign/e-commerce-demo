@@ -135,7 +135,7 @@ async function show_products (req,res,next) {
 	res.json(response)
 }
 
-//validar que el usuario sea administrador
+//validar usuario admin
 async function ensureAdmin(req,res,next){
 	const user_id = req.user_id
 
@@ -145,7 +145,7 @@ async function ensureAdmin(req,res,next){
 			message: "No ha iniciado sesion"
 		})
 	
-	const user = User.find({_id: user_id})
+	const user = await User.findOne({_id: user_id})
 
 	if(!user)
 		return res.json({

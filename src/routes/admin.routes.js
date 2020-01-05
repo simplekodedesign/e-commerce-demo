@@ -4,8 +4,9 @@ const router = Router() //establecer router
 /*------------------------------ADMIN ROUTES-----------------------------------------------*/
 router.use("/currency",ensureAdmin,require("./currency.routes")) //controlar las monedas en las que se presenta el precio
 router.use("/product",require("./product.routes")) //controlar los productos
+router.use("/sales",require("./sales.routes")) //ver las ventas
 
-//validar que el usuario sea administrador
+//validar usuario admin
 async function ensureAdmin(req,res,next){
 	const user_id = req.user_id
 
@@ -15,7 +16,7 @@ async function ensureAdmin(req,res,next){
 			message: "No ha iniciado sesion"
 		})
 	
-	const user = User.find({_id: user_id})
+	const user = await User.findOne({_id: user_id})
 
 	if(!user)
 		return res.json({
