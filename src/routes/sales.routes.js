@@ -113,10 +113,70 @@ router.post("/find",ensureAdmin,async (req,res) => {
 
 	const currency = await Currency.find()
 
+	const user = await User.findOne({
+		_id: sale.user_id
+	})
+
 	const sales_product = await SalesProduct.find({
 		sales_id
 	})
-	
+
+	let products = []
+	let total = 0
+	let prices
+	let price
+
+	for(let i in sales_product){
+		if(sales_product.hasOwnProperty(i)){
+			prices = []
+
+			prices.push({
+				currency: "USD",
+				value: sales_product[i].quantity * sales_product[i].price
+			})
+
+			total += sales_product[i].quantity * sales_product[i].price
+
+			for(let j in currency){
+				if(currency.hasOwnProperty(j)){
+					prices.push({
+						currency: currency[j].currency,
+						value: sales_product[i].quantity * sales_product[i].price * currency[j].value
+					})
+				}
+			}
+
+			products.push({
+				name: sales_product[i].name,
+				prices
+			})
+		}
+	}
+
+	let totals = []
+
+	totals.push({
+		currency: "USD",
+		value: total
+	})
+
+	for(let j in currency){
+		if(currency.hasOwnProperty(j)){
+			totals.push({
+				currency: currency[j].currency,
+				value: total * currency[j].value
+			})
+		}
+	}
+
+	const response = {
+		user: user.email,
+		date: sale.date,
+		products,
+		totals
+	}
+
+	res.json(response)
 
 })
 
