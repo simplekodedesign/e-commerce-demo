@@ -11,4 +11,4 @@ mongoose.connect(process.env.URL_DATABASE,{
 	useCreateIndex: true
 })
 	.then(db => console.log("DB Connected"))
-	.catch(err => console.log("Something Wrong"))
+	.catch(err => console.log("Something Wrong " + err))
