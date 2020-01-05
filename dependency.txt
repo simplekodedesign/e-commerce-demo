@@ -2,7 +2,7 @@
 npm i express morgan mongoose jsonwebtoken bcryptjs dotenv express-fileupload
 
 //dependencias de desarrollo
-npm i nodemon webpack webpack-cli react react-dom @babel/core babel-loader @babel/preset-react @babel/preset-env -D
+npm i nodemon webpack webpack-cli react react-dom @babel/core babel-loader @babel/preset-react @babel/preset-env mini-css-extract-plugin css-loader html-webpack-plugin -D
 
 //scripts
 npm start //arranca la aplicacion con node

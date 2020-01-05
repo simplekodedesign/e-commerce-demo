@@ -7,6 +7,7 @@ const SalesProduct = require("../models/SalesProduct")
 const User = require("../models/User")
 const Car = require("../models/Car")
 const Product = require("../models/Product")
+const Currency = require("../models/Currency")
 
 //añadir a ventas
 router.post("/add",async (req,res) => {
@@ -58,6 +59,126 @@ router.post("/add",async (req,res) => {
 })
 
 //mostrar las ventas
+router.get("/",ensureAdmin,async (req,res) => {
+	const sales = await Sales.find()
+
+	let user
+	let sales_product
+	let total
+	let response = []
+
+	for(let s in sales){
+		if(sales.hasOwnProperty(s)){
+			user = await User.findOne({
+				_id: sales[s].user_id
+			},{
+				email: true
+			})
+
+			sales_product = await SalesProduct.find({
+				sales_id: sales[s]._id
+			})
+
+			total = 0
+
+			for(let i in sales_product)
+				if(sales_product.hasOwnProperty(i))
+					total += sales_product[i].quantity * sales_product[i].price
+
+			response.push({
+				sales_id: sales[s]._id,
+				user: user.email,
+				date: sales[s].date,
+				total
+			})
+		}
+	}
+
+	res.json(response)
+})
+
+//buscar los datos de una venta
+router.post("/find",ensureAdmin,async (req,res) => {
+	const {sales_id} = req.body
+
+	if(!sales_id)
+		return res.json({
+			status: -1,
+			message: "Se esperaba el id de la venta buscada"
+		})
+
+	const sale = await Sales.findOne({
+		_id: sales_id
+	})
+
+	const currency = await Currency.find()
+
+	const user = await User.findOne({
+		_id: sale.user_id
+	})
+
+	const sales_product = await SalesProduct.find({
+		sales_id
+	})
+
+	let products = []
+	let total = 0
+	let prices
+	let price
+
+	for(let i in sales_product){
+		if(sales_product.hasOwnProperty(i)){
+			prices = []
+
+			prices.push({
+				currency: "USD",
+				value: sales_product[i].quantity * sales_product[i].price
+			})
+
+			total += sales_product[i].quantity * sales_product[i].price
+
+			for(let j in currency){
+				if(currency.hasOwnProperty(j)){
+					prices.push({
+						currency: currency[j].currency,
+						value: sales_product[i].quantity * sales_product[i].price * currency[j].value
+					})
+				}
+			}
+
+			products.push({
+				name: sales_product[i].name,
+				prices
+			})
+		}
+	}
+
+	let totals = []
+
+	totals.push({
+		currency: "USD",
+		value: total
+	})
+
+	for(let j in currency){
+		if(currency.hasOwnProperty(j)){
+			totals.push({
+				currency: currency[j].currency,
+				value: total * currency[j].value
+			})
+		}
+	}
+
+	const response = {
+		user: user.email,
+		date: sale.date,
+		products,
+		totals
+	}
+
+	res.json(response)
+
+})
 
 //validar usuario admin
 async function ensureAdmin(req,res,next){
@@ -69,7 +190,7 @@ async function ensureAdmin(req,res,next){
 			message: "No ha iniciado sesion"
 		})
 	
-	const user = User.find({_id: user_id})
+	const user = await User.findOne({_id: user_id})
 
 	if(!user)
 		return res.json({
