@@ -135,6 +135,20 @@ async function show_products (req,res,next) {
 	res.json(response)
 }
 
+//buscar un producto en especifico
+router.post("/find",async (req,res) => {
+	const {product_id} = req.body
+
+	if(!product_id)
+		return res.json({
+			status: -1,
+			message: "Se esperaba el id del producto buscado"
+		})
+
+	
+
+})
+
 //validar usuario admin
 async function ensureAdmin(req,res,next){
 	const user_id = req.user_id
