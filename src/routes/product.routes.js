@@ -144,9 +144,6 @@ router.post("/find",async (req,res) => {
 			status: -1,
 			message: "Se esperaba el id del producto buscado"
 		})
-
-	
-
 })
 
 //validar usuario admin
