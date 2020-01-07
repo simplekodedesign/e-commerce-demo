@@ -5,7 +5,6 @@ function Product (props) {
 
   useEffect(() => {
     if (!props.length) {
-      console.log("Nothing here")
       setInfo({
         imgUrl: "./img/Alternador1.png",
         name: "Alternador1",

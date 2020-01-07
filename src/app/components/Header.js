@@ -3,7 +3,7 @@ import React from 'react'
 function Header () {
   return (
     <header>
-      <img src="" alt="logo" />
+      <img src="./img/logos/Uranx.png" alt="logo" />
       <ul>
         <li>Home</li>
         <li>Store</li>
