@@ -1,4 +1,6 @@
 node_modules
 .env
-public/js/bundle.js
-public/bundle.js
+src/public/js/bundle.js
+src/public/bundle.js
+src/public/index.html
+src/public/bundle.js
