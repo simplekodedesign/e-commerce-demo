@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import Header from './Header'
 import Home from './Home'
 import Store from './Store'
@@ -15,12 +20,14 @@ function App () {
 
 
   return (
-    <main>
+    <Router>
       <Header />
-      <Home />
-      <Store />
+      <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/Store" component={Store} />
+      </Switch>
       <Footer />
-    </main>
+    </Router>
   )
 }
 
