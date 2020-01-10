@@ -11,6 +11,7 @@ function Header () {
       <div>
         <Link  to="/">Home</Link>
         <Link to="/store">Store</Link>
+        <Link to="/Product/Add">Add Product</Link>
         {/* <Link to="/about-us">About us</Link> */}
       </div>
     </header>
