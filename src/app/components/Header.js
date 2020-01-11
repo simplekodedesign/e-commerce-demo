@@ -7,11 +7,11 @@ import {
 function Header () {
   return (
     <header>
-      <img src="./img/logos/Uranx.png" alt="logo" />
-      <div>
-        <Link  to="/">Home</Link>
-        <Link to="/store">Store</Link>
-        {/* <Link to="/about-us">About us</Link> */}
+      <Link className="headerLogo" to="/"><img src="./img/logos/Uranx.png" alt="logo" /></Link>
+      <div className="navbar">
+        <Link  to="/">Inicio</Link>
+        <Link to="/store">Catalogo</Link>
+        <Link to="/about-us">Nosotros</Link>
       </div>
     </header>
   )
