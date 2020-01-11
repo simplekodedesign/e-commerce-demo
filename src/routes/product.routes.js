@@ -13,12 +13,20 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 	const images = req.files
 	let img
 
-	//validar los datos necesarios
-	if(!name || !description || !quantity || !price || !images)
-		return res.json({
-			status: -1,
-			message: "Debe rellenar todos los campos"
-		})
+	//validar los datos necesarios  VERSION FINAL
+	// if(!name || !description || !quantity || !price || !images)
+	// 	return res.json({
+	// 		status: -1,
+	// 		message: "Debe rellenar todos los campos"
+	// 	})
+
+	// Versión de prueba
+
+	if(!name || !description || !quantity || !price)
+	return res.json({
+		status: -1,
+		message: "Debe rellenar todos los campos"
+	})
 
 	//crear el objeto producto
 	const product = new Product({

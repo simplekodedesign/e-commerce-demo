@@ -12,6 +12,7 @@ import AddProduct from './Store_Components/AddProduct'
 
 function App () {
   const [, setInfo] = useState({})
+  const [token, setToken] = useState("")
 
   useEffect(() => {
     setInfo({
@@ -25,9 +26,13 @@ function App () {
       <Header />
       <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/Store" component={Store} />
+          <Route path="/Store">
+            <Store
+              setToken={setToken}
+            />
+          </Route>
           <Route path="/Product/Add">
-            <AddProduct />
+            <AddProduct token={token} />
           </Route>
       </Switch>
       <Footer />
