@@ -1,3 +1,8 @@
+/*-------------------General styles----------------------------*/
+:root{
+	--primary: #01ff07;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -6,28 +11,346 @@ body {
 	margin: 0;
 	padding: 0;
 	display: flex;
-	flex-direction: column;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif; */
 }
 
-header {
-	width: 100%;
-	height: 80px;
-	background-color: gray;
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	padding: 10px;
+html{
+  scroll-behavior: smooth;
 }
 
-header > ul {
-	padding: 0;
-	margin: 0;
+.bold{
+  color: var(--primary) !important;
 }
 
-header > img {
-	height: 100%;
-	width: auto;
+.title{
+  font-size: 3em;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 1px;
 }
+
+body, h1, h2, h3, h4, h5, p{
+  margin: 0;
+  padding: 0;
+  text-rendering: geometricPrecision;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.button{
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: var(--primary);
+  text-align: center;
+  color: black;
+  padding: 20px 20px;
+  font-size: 2em;
+}
+
+/*--------------------HEADER------------------------------*/
+
+header{
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  position: sticky;
+  padding-left: 20px;
+  top: 0;
+  transition: .5s ease;
+  z-index: 3;
+}
+
+.headerScrolled{
+  background-color: black;
+}
+
+.headerScrolled > .navbar > a{
+  color: white;
+}
+
+.headerScrolled > img{
+  opacity: 1;
+}
+
+header > .headerLogo > img{
+  height: 100%;
+  width: auto;
+  /* opacity: 0; */
+  transition: .5s ease;
+}
+
+.headerLogo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+header > .navbar{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 100%;
+  width: 50%;
+  min-width: 300px;
+}
+
+#navbar-icon{
+  display: none;
+  position: relative;
+  justify-content: center;
+  align-items: flex-start;
+  width: 50px;
+  height: 100%;
+  cursor: pointer;
+}
+
+#navbar-icon > span{
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 3px;
+}
+
+#navbar-icon > span::before, #navbar-icon > span::after{
+  content: "";
+  position: absolute;
+  background-color: white;
+  width: 30px;
+  height: 3px;
+  top: 10px;
+}
+
+#navbar-icon > span::after{
+  bottom: 10px;
+  top: auto;
+}
+
+.navbar > a{
+  color: white;
+  min-height: 16px;
+}
+
+.navbar > a:hover{
+  color: var(--primary);
+}
+
+/*--------------------------------HOME---------------------------------------*/
+
+section{
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(19, 19, 19);
+  padding: 2%;
+}
+
+#hero{
+  background: url("./img/Fondo Hero Inicio.png") center/cover no-repeat;
+  background-color: rgb(19, 19, 19);
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+#hero > div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  min-width: 300px;
+  max-width: 60ch;
+  color: white;
+  height: 100%;
+  min-height: 500px;
+  max-height: 700px;
+}
+
+#hero > div > h1{
+  font-size: 4rem;
+  width: 100%;
+}
+
+#hero > div > p{
+  width: 100%;
+  font-size: 1.5em;
+}
+
+/*-------------------------------Why us-----------------------------------*/
+
+.usCard{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: 200px;
+  background-color: var(--primary);
+  /* color: white; */
+  color: black;
+  text-align: center;
+}
+
+.usCardtext{
+  width: 50%;
+  font-size: 1.2em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.usCardtext > h4{
+  font-size: 1.5em;
+}
+
+.usCard > img{
+  height: 150px;
+  background-color: white;
+  border-radius: 50%;
+  max-width: 40%;
+  /* height: auto; */
+}
+
+/*-------------------------------Meet us----------------------------------*/
+
+#meetUs{
+  justify-content: flex-end;
+}
+
+#meetUs > .aboutPhoto{
+  width: 30%;
+  border: 10px solid white;
+  border-bottom: 20px solid white;;
+  position: absolute;
+  min-width: 300px;
+  height: auto;
+}
+
+#meetUs > .aboutPhoto > img{
+  width: 100%;
+}
+
+#aboutPhoto{
+  transform: rotate(-10deg);
+  top: 10%;
+  left: 3%;
+  z-index: 0;
+}
+
+#aboutLogo{
+  top: 30%;
+  left: 25%;
+  background-color: #333;
+  transform: rotate(20deg);
+  z-index: 1;
+}
+
+.meetText{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 300px;
+  width: 40%;
+  min-height: 500px;
+  text-align: center;
+}
+
+.meetText > p{
+  font-size: 1.5em;
+}
+
+/*--------------------------Testimonials------------------------------*/
+
+#testimonials{
+  align-items: center;
+}
+
+.testimonial{
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 85%;
+}
+
+.testimonial > .meetText{
+  align-items: center;
+  font-size: 1.5em;
+  min-height: 350px;
+}
+
+.testimonial > .meetText > h4{
+  font-size: 2em;
+} 
+
+.testimonial > .meetText > h5{
+  font-size: 1.2em;
+}
+
+.testimonial > img{
+  width: 25%;
+  /* max-height: 500px; */
+}
+
+.Tactive{
+  display: flex;
+}
+
+.arrow{
+  width: 50px;
+  height: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.arrow::before, .arrow::after{
+  content: "";
+  width: 4px;
+  height: 50px;
+  background-color: white;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.arrow::after{
+  transform: rotate(-45deg);
+  top: 34%;
+  left: 46%;
+}
+
+#next{
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+}
+
+/*--------------------------Store (for work)--------------------------*/
 
 .store {
 	background-color: pink;
@@ -56,4 +379,154 @@ header > img {
 .product > img {
 	height: 60%;
 	width: auto;
+}
+
+
+/*--------------------Footer----------------------------*/
+
+footer {
+  width: 100%;
+  padding: 1% 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 300px;
+}
+
+footer > .logoFooter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  width: 30%;
+  min-height: 200px;
+}
+
+.logoFooter > img{
+  width: 100%;
+}
+
+footer .contacCont{
+  flex-direction: column;
+  display: flex;
+  font-style: normal;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  min-width: 300px;
+  padding-left: 10px;
+  min-height: 200px;
+}
+
+footer a{
+  color: black;
+}
+
+footer > .contactForm{
+  width: 30%;
+  min-height: 200px;
+  height: 100%;
+  max-height: 500px;
+  min-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  transition: .5s ease-in-out;
+}
+
+.contactForm > div {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.contactForm h3{
+  text-align: left;
+  width: 100%;
+}
+
+.contactForm .button{
+  width: 100%;
+}
+
+.contactForm input, .contactForm textarea{
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  min-height: 20px;
+  padding: 10px 5px;
+  width: 48%;
+  font-size: 1.1em;
+  color: black;
+  resize: none;
+  outline: 0;
+}
+
+.contactForm textarea{
+  min-height: 100px;
+  width: 100%;
+}
+
+.contact {
+  position: relative;
+  padding-left: 30px;
+  margin: 10px 0;
+}
+
+footer .contacCont .contact:last-child{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#location::before {
+  content: url(../img/icon-location.svg);
+  position: absolute;
+  left: 5px;
+}
+
+#number::before {
+  content: url(../img/icon-phone.svg);
+  position: absolute;
+  left: 0;
+}
+
+#email::before {
+  content: url(../img/icon-email.svg);
+  position: absolute;
+  left: 0;
+}
+
+#Rs{
+  margin-top: 20px;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  min-width: 300px;
+  width: 30%;
+}
+
+.iconRS {
+  align-items: center;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  position: relative;
+  width: 60px;
+  cursor: pointer;
+}
+
+.iconRS img{
+  width: 70%;
+  height: 70%;
+}
+
+.iconRS > a {
+  width: 100%;
+  height: 100%;
 }

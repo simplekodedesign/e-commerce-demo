@@ -28,7 +28,7 @@ function Search_Bar (props) {
         value={inputValue}
         onChange={handleInputChange}
       />
-      <button onClick={search}>GO!</button>
+      <button onClick={search}>search</button>
     </form>
   )
 }
