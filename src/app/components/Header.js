@@ -12,6 +12,7 @@ function Header () {
         <Link  to="/">Inicio</Link>
         <Link to="/store">Catalogo</Link>
         <Link to="/about-us">Nosotros</Link>
+        <Link to="/Product/Add">Add Product</Link>
       </div>
     </header>
   )

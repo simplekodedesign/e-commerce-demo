@@ -8,6 +8,7 @@ import Header from './Header'
 import Home from './Home'
 import Store from './Store'
 import Footer from './Footer'
+import AddProduct from './Store_Components/AddProduct'
 
 function App () {
   const [, setInfo] = useState({})
@@ -25,6 +26,9 @@ function App () {
       <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/Store" component={Store} />
+          <Route path="/Product/Add">
+            <AddProduct />
+          </Route>
       </Switch>
       <Footer />
     </Router>

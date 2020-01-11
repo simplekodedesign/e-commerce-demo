@@ -30,7 +30,8 @@ app.use("/client",ensureToken,require("./routes/client.routes")) //rutas de clie
 
 //asegurarse de que haya creado un token
 function ensureToken(req,res,next){
-	const bearerHeader = req.headers["autorization"]
+	console.log(req.headers)
+	const bearerHeader = req.headers["authorization"]
 	if(bearerHeader != undefined){
 		const bearer = bearerHeader.split(" ")
 		const bearerToken = bearer[1]
