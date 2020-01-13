@@ -18,17 +18,6 @@ function Products_Board (props) {
       })
       return itemArray
     })
-    
-    // setProducts(() => {
-    //   const productsLength = props.products.productsLength
-    //   let [item, itemArray] = [, []]
-    //   for (let i = 0; i < productsLength; i++) {
-    //     item = <Product key={i} />
-    //     itemArray.push(item)
-    //   }
-
-    //   return itemArray
-    // })
   }, [props])
 
   return (
