@@ -92,55 +92,49 @@ async function show_car (req,res) {
 		})
 
 	const car = await Car.find({user_id})
-	const currency = await Currency.find()
+	const currencies = await Currency.find()
 
 	let product
 	let images
 	let prices
-	let response = [] 
+	let response
 
-	
+	response = await Promise.all(car.map(async (c) => {
+		product = await Product.findOne({
+			_id: c.product_id
+		},{
+			name: true,
+			description: true,
+			price: true
+		})
 
-	for(let c in car){
-		if(car.hasOwnProperty(c)){
-			product = await Product.findOne({
-				_id: car[c].product_id
-			},{
-				name: true,
-				description: true,
-				price: true
-			})
+		images = await Image.find({
+			product_id: c.product_id
+		},{
+			url: true
+		})
 
-			images = await Image.find({
-				product_id: car[c].product_id
-			},{
-				url: true
-			})
+		prices = []
 
-			prices = []
+		prices.push({
+			currency: "USD",
+			price: product.price * c.quantity
+		})
 
+		await Promise.all(currencies.map(currency => {
 			prices.push({
-				currency: "USD",
-				price: product.price * car[c].quantity
+				currency: currency.currency,
+				price: currency.value * product.price * c.quantity
 			})
+		}))
 
-			for(let i in currency){
-				if(currency.hasOwnProperty(i)){
-					prices.push({
-						currency: currency[i].currency,
-						price: currency[i].value * product.price * car[c].quantity
-					})
-				}
-			}
-
-			response.push({
-				data: product,
-				quantity: car[c].quantity,
-				images,
-				prices
-			})
-		}
-	}
+		return({
+			data: product,
+			quantity: c.quantity,
+			images,
+			prices
+		})
+	}))
 
 	res.json(response) 
 }

@@ -44,6 +44,7 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 
 	//guardar las imagenes del producto
 	const product_id = product._id
+
 	for(let key in images){
 		if(images.hasOwnProperty(key)){
 			img = new Image({
@@ -112,36 +113,28 @@ async function show_products (req,res,next) {
 	const products = await Product.find()
 	const currencies = await Currency.find()
 
-	let img
-	let imgs
+	let images
 	let prices
-	let response = []
+	let response
 
-	for(let key in products){
-		if(products.hasOwnProperty(key)){
-			img = await Image.find({product_id: products[key]._id},{url: true})
+	response = await Promise.all(products.map(async (product) => {
+		images = await Image.find({product_id: product._id},{url: true})
 
-			prices = []
-			imgs = []
+		images = images.map(img => img.url)
 
-			for(let i in img)
-				if(img.hasOwnProperty(i))
-					imgs.push(img[i].url)
+		prices = currencies.map(currency => {
+			return {
+				currency: currency.currency,
+				value: currency.value * product.price
+			}
+		})
 
-			for(let i in currencies)
-				if(currencies.hasOwnProperty(i))
-					prices.push({
-						currency: currencies[i].currency,
-						value: currencies[i].value * products[key].price
-					})
-
-			response.push({
-				data: products[key],
-				images: imgs,
-				prices
-			})
+		return {
+			data: product,
+			images,
+			prices
 		}
-	}
+	}))
 
 	res.json(response)
 }

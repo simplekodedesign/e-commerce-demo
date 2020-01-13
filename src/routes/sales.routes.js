@@ -38,22 +38,20 @@ router.post("/add",async (req,res) => {
 	let sales_product
 	let product
 
-	for(let c in car){
-		if(car.hasOwnProperty(c)){
-			product = await Product.findOne({
-				_id: car[c].product_id
-			})
+	await Promise.all(car.map(async (c) => {
+		product = await Product.findOne({
+			_id: c.product_id
+		})
 
-			sales_product = new SalesProduct({
-				sales_id,
-				name: product.name,
-				quantity: car[c].quantity,
-				price: product.price
-			})
+		sales_product = new SalesProduct({
+			sales_id,
+			name: product.name,
+			quantity: c.quantity,
+			price: product.price
+		})
 
-			await sales_product.save()
-		}
-	}
+		await sales_product.save()
+	}))
 
 	res.json({
 		status: 1,
@@ -68,34 +66,32 @@ router.get("/",ensureAdmin,async (req,res) => {
 	let user
 	let sales_product
 	let total
-	let response = []
+	let response
 
-	for(let s in sales){
-		if(sales.hasOwnProperty(s)){
-			user = await User.findOne({
-				_id: sales[s].user_id
-			},{
-				email: true
-			})
+	response = await Promise.all(sales.map(async (sale) => {
+		user = await User.findOne({
+			_id: sale.user_id
+		},{
+			email: true
+		})
 
-			sales_product = await SalesProduct.find({
-				sales_id: sales[s]._id
-			})
+		sales_product = await SalesProduct.find({
+			sales_id: sale._id
+		})
 
-			total = 0
+		total = 0
 
-			for(let i in sales_product)
-				if(sales_product.hasOwnProperty(i))
-					total += sales_product[i].quantity * sales_product[i].price
+		sales_product.map(product => {
+			total += product.quantity * product.price
+		})
 
-			response.push({
-				sales_id: sales[s]._id,
-				user: user.email,
-				date: sales[s].date,
-				total
-			})
+		return {
+			sales_id: sale._id,
+			user: user.email,
+			date: sale.date,
+			total
 		}
-	}
+	}))
 
 	res.json(response)
 })
@@ -114,7 +110,7 @@ router.post("/find",ensureAdmin,async (req,res) => {
 		_id: sales_id
 	})
 
-	const currency = await Currency.find()
+	const currencies = await Currency.find()
 
 	const user = await User.findOne({
 		_id: sale.user_id
@@ -124,37 +120,33 @@ router.post("/find",ensureAdmin,async (req,res) => {
 		sales_id
 	})
 
-	let products = []
+	let products
 	let total = 0
 	let prices
 	let price
 
-	for(let i in sales_product){
-		if(sales_product.hasOwnProperty(i)){
-			prices = []
+	products = await Promise.all(sales_product.map(async (product) => {
+		prices = []
 
+		prices.push({
+			currency: "USD",
+			value: sales_product[i].quantity * sales_product[i].price
+		})
+
+		total += sales_product[i].quantity * sales_product[i].price
+
+		await Promise.all(currencies.map(currency => {
 			prices.push({
-				currency: "USD",
-				value: sales_product[i].quantity * sales_product[i].price
+				currency: currency.currency,
+				value: product.quantity * product.price * currency.value
 			})
+		}))
 
-			total += sales_product[i].quantity * sales_product[i].price
-
-			for(let j in currency){
-				if(currency.hasOwnProperty(j)){
-					prices.push({
-						currency: currency[j].currency,
-						value: sales_product[i].quantity * sales_product[i].price * currency[j].value
-					})
-				}
-			}
-
-			products.push({
-				name: sales_product[i].name,
-				prices
-			})
+		return {
+			name: product.name,
+			prices
 		}
-	}
+	}))
 
 	let totals = []
 
@@ -163,14 +155,12 @@ router.post("/find",ensureAdmin,async (req,res) => {
 		value: total
 	})
 
-	for(let j in currency){
-		if(currency.hasOwnProperty(j)){
-			totals.push({
-				currency: currency[j].currency,
-				value: total * currency[j].value
-			})
-		}
-	}
+	await Promise.all(currencies.map(currency => {
+		totals.push({
+			currency: currency.currency,
+			value: total * currency.value
+		})
+	}))
 
 	const response = {
 		user: user.email,
