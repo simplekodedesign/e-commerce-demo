@@ -1,6 +1,10 @@
+const jwt = require("jsonwebtoken")
+
+//models
+const User = require("../models/User")
+
 //asegurarse de que haya creado un token
 const ensureToken = function (req,res,next){
-	console.log(req.headers)
 	const bearerHeader = req.headers["authorization"]
 	if(bearerHeader != undefined){
 		const bearer = bearerHeader.split(" ")

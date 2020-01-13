@@ -99,6 +99,8 @@ async function show_car (req,res) {
 	let prices
 	let response = [] 
 
+	
+
 	for(let c in car){
 		if(car.hasOwnProperty(c)){
 			product = await Product.findOne({

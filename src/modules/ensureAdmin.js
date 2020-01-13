@@ -1,3 +1,6 @@
+//models
+const User = require("../models/User")
+
 //validar usuario admin
 const ensureAdmin = async function (req,res,next){
 	const user_id = req.user_id
