@@ -1,7 +1,10 @@
 const {Router} = require("express")
 const router = Router()
 
-//modelos
+//modules
+const ensureAdmin = require("../modules/ensureAdmin")
+
+//models
 const Product = require("../models/Product")
 const Currency = require("../models/Currency")
 const Image = require("../models/Image")
@@ -153,34 +156,5 @@ router.post("/find",async (req,res) => {
 			message: "Se esperaba el id del producto buscado"
 		})
 })
-
-//validar usuario admin
-async function ensureAdmin(req,res,next){
-	const user_id = req.user_id
-
-	if(!user_id)
-		return res.json({
-			status: -1,
-			message: "No ha iniciado sesion"
-		})
-	
-	const user = await User.findOne({_id: user_id})
-
-	if(!user)
-		return res.json({
-			status: -2,
-			message: "No se encontro el usuario"
-		})
-
-	const isAdmin = user.admin
-
-	if(!isAdmin)
-		return res.json({
-			status: -3,
-			message: "No tienes acceso a esta ruta"
-		})
-
-	next()
-}
 
 module.exports = router
