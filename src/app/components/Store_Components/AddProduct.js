@@ -1,42 +1,24 @@
 import React, { useState, useEffect } from 'react'
 
-function AddProduct () {
+function AddProduct (props) {
   const [info, setInfo] = useState({
     name: "",
     description: "",
-    quantity: "",
-    price: ""
+    quantity: 0,
+    price: 0
   })
-  const [user,] = useState({
-    email: "AdminDNL",
-    password: "0990"
-  })
-  const [token, setToken] = useState("")
 
   useEffect(() => {
-    const body = JSON.stringify(user)
-    console.log(JSON.stringify(user))
-    fetch("/login/", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: body
-    })
-    .then(response => {
-      console.log(response)
-      return response.json()
-    })
-    .then(res => {
-      console.log(res)
-      setToken(res.token)
-    })
+    
   }, [])
 
 
   function handleInputChange (e) {
-    const {name, value} = e.target
-    console.log(info)
+    let {name, value} = e.target
+    if(name === "price" || name === "quantity"){
+      value = parseInt(value)
+      if(value === NaN) return
+    } 
     setInfo(prev => {
       return ({
         ...prev,
@@ -47,6 +29,35 @@ function AddProduct () {
 
   function handleSubmit (e) {
     e.preventDefault()
+
+    // setInfo(prev => {
+    //   return ({
+    //     ...prev,
+    //     price: parseInt(prev.price),
+    //     quantity: parseInt(prev.quantity)
+    //   })
+    // })
+
+
+    const body = JSON.stringify(info)
+
+    console.log(body)
+
+    fetch("/admin/product/add", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: "bearer " + props.token
+      },
+      body: body
+    })
+    .then(response => {
+      console.log(response)
+      return response.json()
+    })
+    .then(res => {
+      console.log(res)
+    })
   }
 
   return (
@@ -82,7 +93,7 @@ function AddProduct () {
             <td>
               <input 
                 required
-                type="text"
+                type="number"
                 name="quantity"
                 value={info.quantity}
                 onChange={handleInputChange}
@@ -94,7 +105,7 @@ function AddProduct () {
             <td>
               <input 
                 required
-                type="text"
+                type="number"
                 name="price"
                 value={info.price}
                 onChange={handleInputChange}

@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from 'react'
 
 function Product (props) {
-  const [info, setInfo] = useState({})
+  // const [info, setInfo] = useState({})
 
   useEffect(() => {
-    if (!props.length) {
-      setInfo({
-        imgUrl: "./img/Alternador1.png",
-        name: "Alternador1",
-        price1: "250",
-        price2: "780000"
-      })
-    }
+    console.log(props)
   }, [])
 
   return (
     <div className="product">
-      <img alt="Product Image" src={info.imgUrl} />
+      <img alt="Product Image" src="./img/Alternador1.png" />
       <div className="product_info">
-        <h3>{ info.name }</h3>
+        <h3>{ props.info.data.name }</h3>
+        <p>{ props.info.data.description }</p>
         <div className="product_prices">
-          <span>{ info.price1 }</span>
-          <span>{ info.price2 }</span>
+          <span>{ props.info.data.price }</span>
         </div>
       </div>
     </div>

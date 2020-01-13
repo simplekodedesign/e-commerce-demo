@@ -1,7 +1,10 @@
 const {Router} = require("express")
 const router = Router()
 
-//modelos
+//modules
+const ensureAdmin = require("../modules/ensureAdmin")
+
+//models
 const Product = require("../models/Product")
 const Currency = require("../models/Currency")
 const Image = require("../models/Image")
@@ -13,12 +16,20 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 	const images = req.files
 	let img
 
-	//validar los datos necesarios
-	if(!name || !description || !quantity || !price || !images)
-		return res.json({
-			status: -1,
-			message: "Debe rellenar todos los campos"
-		})
+	//validar los datos necesarios  VERSION FINAL
+	// if(!name || !description || !quantity || !price || !images)
+	// 	return res.json({
+	// 		status: -1,
+	// 		message: "Debe rellenar todos los campos"
+	// 	})
+
+	// Versión de prueba
+
+	if(!name || !description || !quantity || !price)
+	return res.json({
+		status: -1,
+		message: "Debe rellenar todos los campos"
+	})
 
 	//crear el objeto producto
 	const product = new Product({
@@ -33,6 +44,7 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 
 	//guardar las imagenes del producto
 	const product_id = product._id
+
 	for(let key in images){
 		if(images.hasOwnProperty(key)){
 			img = new Image({
@@ -101,36 +113,28 @@ async function show_products (req,res,next) {
 	const products = await Product.find()
 	const currencies = await Currency.find()
 
-	let img
-	let imgs
+	let images
 	let prices
-	let response = []
+	let response
 
-	for(let key in products){
-		if(products.hasOwnProperty(key)){
-			img = await Image.find({product_id: products[key]._id},{url: true})
+	response = await Promise.all(products.map(async (product) => {
+		images = await Image.find({product_id: product._id},{url: true})
 
-			prices = []
-			imgs = []
+		images = images.map(img => img.url)
 
-			for(let i in img)
-				if(img.hasOwnProperty(i))
-					imgs.push(img[i].url)
+		prices = currencies.map(currency => {
+			return {
+				currency: currency.currency,
+				value: currency.value * product.price
+			}
+		})
 
-			for(let i in currencies)
-				if(currencies.hasOwnProperty(i))
-					prices.push({
-						currency: currencies[i].currency,
-						value: currencies[i].value * products[key].price
-					})
-
-			response.push({
-				data: products[key],
-				images: imgs,
-				prices
-			})
+		return {
+			data: product,
+			images,
+			prices
 		}
-	}
+	}))
 
 	res.json(response)
 }
@@ -145,34 +149,5 @@ router.post("/find",async (req,res) => {
 			message: "Se esperaba el id del producto buscado"
 		})
 })
-
-//validar usuario admin
-async function ensureAdmin(req,res,next){
-	const user_id = req.user_id
-
-	if(!user_id)
-		return res.json({
-			status: -1,
-			message: "No ha iniciado sesion"
-		})
-	
-	const user = await User.findOne({_id: user_id})
-
-	if(!user)
-		return res.json({
-			status: -2,
-			message: "No se encontro el usuario"
-		})
-
-	const isAdmin = user.admin
-
-	if(!isAdmin)
-		return res.json({
-			status: -3,
-			message: "No tienes acceso a esta ruta"
-		})
-
-	next()
-}
 
 module.exports = router

@@ -11,6 +11,9 @@ const app = express()
 //utilizar las variables de entorno
 require("dotenv").config()
 
+//modules
+const ensureToken = require("./modules/ensureToken")
+
 //configuraciones
 app.set("port",process.env.PORT || 3000) //establecer puerto
 
@@ -24,33 +27,8 @@ app.use(express.static(path.join(__dirname,"public")))
 
 /*------------ROUTES----------------*/
 app.use("/login",require("./routes/login.routes")) //Login
-app.use("/admin",ensureToken,require("./routes/admin.routes")) //rutas de administrador
-app.use("/client",ensureToken,require("./routes/client.routes")) //rutas de clientes
-
-
-//asegurarse de que haya creado un token
-function ensureToken(req,res,next){
-	console.log(req.headers)
-	const bearerHeader = req.headers["authorization"]
-	if(bearerHeader != undefined){
-		const bearer = bearerHeader.split(" ")
-		const bearerToken = bearer[1]
-		req.token = bearerToken
-
-		//decifrar el token
-		const decoded = jwt.verify(req.token,process.env.SECRET_KEY)
-		
-		//guardar el id del usuario para compartirlo con las otras rutas
-		req.user_id = decoded.id
-		
-		next()
-	}else{
-		res.json({
-			status: -1,
-			message: "No ha Iniciado Session"
-		})
-	}
-}
+app.use("/admin",require("./routes/admin.routes")) //rutas de administrador
+app.use("/client",require("./routes/client.routes")) //rutas de clientes
 
 //arrancar el servidor
 app.listen(app.get("port"),() => {
