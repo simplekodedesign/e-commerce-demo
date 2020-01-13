@@ -15,7 +15,7 @@ function Footer () {
           <a href="mailto:contact@eberthscapital.com" id="email">contact@uranx.com</a>
         </div>
       </address>
-      <div class='logoFooter'>
+      <div className='logoFooter'>
         <img src="./img/logos/Uranx.png" alt="logo" />
         <div id="Rs">
             <div className="iconRS">

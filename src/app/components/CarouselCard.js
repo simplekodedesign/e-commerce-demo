@@ -1,8 +1,6 @@
 import React, { useState, useEffect} from 'react'
 
-function Testimonial (props){
-
-  console.log(props, props.isActive === props.idproduct ? true : false)
+function CarouselCard(props){
 
   return(
     <div className={`${props.isActive === props.idproduct ? "Tactive" : null} testimonial`}>
@@ -18,4 +16,4 @@ function Testimonial (props){
   )
 }
 
-export default Testimonial
+export default CarouselCard

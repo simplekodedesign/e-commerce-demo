@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Testimonial from './Testimonial'
+import CarouselCard from './CarouselCard'
 import {
   BrowserRouter as Router,
   Link
@@ -112,9 +112,9 @@ function Home () {
       <section id="testimonials">
         <h2 className="title bold">Nuestros Clientes</h2>
         <span className="arrow" id="prev" onClick={()=>{testimonialHandler(false)}}></span>
-        <Testimonial idproduct={0} isActive={active} data={data[0]} />
-        <Testimonial idproduct={1} isActive={active} data={data[1]} />
-        <Testimonial idproduct={2} isActive={active} data={data[2]} />
+        <CarouselCard idproduct={0} isActive={active} data={data[0]} />
+        <CarouselCard idproduct={1} isActive={active} data={data[1]} />
+        <CarouselCard idproduct={2} isActive={active} data={data[2]} />
         <span className="arrow" id="next" onClick={()=>{testimonialHandler(true)}}></span>
       </section>
     </div>

@@ -15,6 +15,7 @@ function Store () {
 
   return (
     <div className="store">
+      <StarProduct />
       <Nav_Bar setCategory={setCategory} />
       <Products_Board products={data} />
     </div>
