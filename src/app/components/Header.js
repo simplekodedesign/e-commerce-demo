@@ -10,7 +10,12 @@ function Header (props) {
   const [menu, setMenu] = useState("")
 
   useEffect(() => {
-    setMenu(<UserMenu isAdmin={props.userInfo.isAdmin} />)
+    setMenu(
+      <UserMenu 
+        isAdmin={props.userInfo.isAdmin}
+        logOut={props.logOut}
+      />
+    )
   }, [props])
 
   return (
@@ -21,7 +26,7 @@ function Header (props) {
         <Link to="/store">Catalogo</Link>
         <Link to="/about-us">Nosotros</Link>
         <Link to="/Product/Add">Add Product</Link>
-        <Login submitUser={props.loginUser} />
+        {!props.userInfo.auth && <Login submitUser={props.loginUser} />}
         {props.userInfo.auth && menu}
       </div>
     </header>

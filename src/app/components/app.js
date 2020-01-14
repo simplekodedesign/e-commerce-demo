@@ -30,23 +30,27 @@ function App () {
     .then(res => setUserInfo(res))
   }
 
+  function logOut () {
+    setUserInfo({})
+  }
+
   return (
     <Router>
       <Header
-      loginUser={loginUser}
-      userInfo={userInfo}
+        loginUser={loginUser}
+        userInfo={userInfo}
+        logOut={logOut}
       />
       <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/Store">
-            <Store userInfo={userInfo}
-            />
-          </Route>
-          <Route path="/Product/Add">
-            <AddProduct
-              userInfo={userInfo}
-            />
-          </Route>
+        <Route exact path="/" component={Home} />
+        <Route path="/Store">
+          <Store userInfo={userInfo} />
+        </Route>
+        <Route path="/Product/Add">
+          <AddProduct
+            userInfo={userInfo}
+          />
+        </Route>
       </Switch>
       <Footer />
     </Router>
