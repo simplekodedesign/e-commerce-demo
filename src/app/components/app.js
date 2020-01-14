@@ -11,28 +11,41 @@ import Footer from './Footer'
 import AddProduct from './Store_Components/AddProduct'
 
 function App () {
-  const [, setInfo] = useState({})
-  const [token, setToken] = useState("")
+  const [userInfo, setUserInfo] = useState("")
 
   useEffect(() => {
-    setInfo({
-      greeting: "Hi There!"
-    })
+
   }, [])
 
+  function loginUser (data) {
+    const body = JSON.stringify(data)
+    fetch("/login/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    })
+    .then(response => response.json())
+    .then(res => setUserInfo(res))
+  }
 
   return (
     <Router>
-      <Header />
+      <Header
+      loginUser={loginUser}
+      userInfo={userInfo}
+      />
       <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/Store">
-            <Store
-              setToken={setToken}
+            <Store userInfo={userInfo}
             />
           </Route>
           <Route path="/Product/Add">
-            <AddProduct token={token} />
+            <AddProduct
+              userInfo={userInfo}
+            />
           </Route>
       </Switch>
       <Footer />

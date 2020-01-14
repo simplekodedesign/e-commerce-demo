@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Products_Board from './Store_Components/Products_Board'
 import Nav_Bar from './Store_Components/Nav_Bar'
+import StarProduct from './Store_Components/starProduct'
+import Login from './Login'
 
 function Store () {
   const [, setCategory] = useState("")
@@ -10,12 +12,6 @@ function Store () {
 
   useEffect(() => {
     setCategory("Alternadores")
-
-    const body = JSON.stringify({
-      email: "AdminDNL",
-      password: "0990"
-    })
-
 
     fetch("client/product/", {
       method: 'GET',
@@ -28,38 +24,12 @@ function Store () {
       console.log(res)
       setData(res)
     })
-
-    // fetch("/login/", {
-    //   method: "POST",
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: body
-    // })
-    // .then(response => response.json())
-    // .then(res => {
-    //   console.log(res)
-    //   setToken(res.token)
-    //   return (fetch("/admin/product/", {
-    //     method: "GET",
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'authorization': 'bearer ' + res.token
-    //     }
-    //   }))
-    // })
-    // .then(response => response.json())
-    // .then(res => {
-    //   setData(res)
-    // })
   }, [])
 
   return (
     <div className="store">
-      <Nav_Bar 
-        setCategory={setCategory}
-        isAdmin={isAdmin}
-      />
+      <StarProduct />
+      <Nav_Bar />
       <Products_Board products={data} />
     </div>
   )
