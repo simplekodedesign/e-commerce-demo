@@ -9,9 +9,11 @@ import Home from './Home'
 import Store from './Store'
 import Footer from './Footer'
 import AddProduct from './Store_Components/AddProduct'
+import Product from './Store_Components/Product'
 
 function App () {
   const [userInfo, setUserInfo] = useState("")
+  const [product, setProduct] = useState({})
 
   useEffect(() => {
 
@@ -44,11 +46,19 @@ function App () {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/Store">
-          <Store userInfo={userInfo} />
+          <Store 
+            userInfo={userInfo} 
+            setProduct={setProduct}
+          />
         </Route>
         <Route path="/Product/Add">
           <AddProduct
             userInfo={userInfo}
+          />
+        </Route>
+        <Route path="/Product/">
+          <Product
+            product={product}
           />
         </Route>
       </Switch>

@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import Product from './Product'
+import ProductCard from './ProductCard'
 
 function Products_Board (props) {
   const [products, setProducts] = useState()
 
   useEffect(() => {
-    console.log(props)
-
     setProducts(() => {
       const itemArray = props.products.map(item => {
         return (
-          <Product 
+          <ProductCard 
             key={item.data._id}
             info={item}
+            setProduct={props.setProduct}
           />
         )
       })

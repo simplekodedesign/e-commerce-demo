@@ -410,6 +410,25 @@ section{
 	width: 50%;
 }
 
+.product_screen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  min-height: 500px;
+}
+
+.product_screen > .gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product_screen > .product_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 /*--------------------Footer----------------------------*/
 

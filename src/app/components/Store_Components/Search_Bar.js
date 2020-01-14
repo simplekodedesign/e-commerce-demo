@@ -10,7 +10,7 @@ function Search_Bar (props) {
 
   function search (e) {
     e.preventDefault()
-    props.setCategory(inputValue)
+    props.findProduct(inputValue)
   }
 
   function handleInputChange (e) {
@@ -21,14 +21,14 @@ function Search_Bar (props) {
 
 
   return(
-    <form className="search_bar">
+    <form className="search_bar" onSubmit={search}>
       <input
         type="text"
         placeholder="Search"
         value={inputValue}
         onChange={handleInputChange}
       />
-      <button onClick={search}>search</button>
+      <button>search</button>
     </form>
   )
 }

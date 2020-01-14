@@ -30,15 +30,6 @@ function AddProduct (props) {
   function handleSubmit (e) {
     e.preventDefault()
 
-    // setInfo(prev => {
-    //   return ({
-    //     ...prev,
-    //     price: parseInt(prev.price),
-    //     quantity: parseInt(prev.quantity)
-    //   })
-    // })
-
-
     const body = JSON.stringify(info)
 
     console.log(body)
@@ -58,6 +49,10 @@ function AddProduct (props) {
     .then(res => {
       console.log(res)
     })
+  }
+
+  function handleFilesChange (e) {
+    console.log(e.target.value)
   }
 
   return (
@@ -109,6 +104,19 @@ function AddProduct (props) {
                 name="price"
                 value={info.price}
                 onChange={handleInputChange}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Image: </td>
+            <td>
+              <input
+                required
+                multiple
+                type="file"
+                name="price"
+                onChange={handleFilesChange}
+                onInput={handleFilesChange}
               />
             </td>
           </tr>
