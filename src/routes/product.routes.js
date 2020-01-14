@@ -1,5 +1,4 @@
 const {Router} = require("express")
-const url = require("url")
 const router = Router()
 
 //variables de entorno
