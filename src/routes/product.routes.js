@@ -1,5 +1,9 @@
 const {Router} = require("express")
+const url = require("url")
 const router = Router()
+
+//variables de entorno
+require("dotenv").config()
 
 //modules
 const ensureAdmin = require("../modules/ensureAdmin")
@@ -42,7 +46,23 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 	//guardar el producto
 	await product.save()
 
-	//guardar las imagenes del producto
+	//guardar las imagenes del producto en el servidor
+
+	//en el servidor
+	for(let key in images){
+		if(images.hasOwnProperty(key)){
+			images[key].mv(process.env.URL_UPLOAD_FILES+images[key].name , err => {
+				if(err) 
+					return res.json({
+						status: -2,
+						message: "Error al cargar las imagenes",
+						err
+					})
+			})
+		}
+	}
+
+	//en la DB
 	const product_id = product._id
 
 	for(let key in images){
