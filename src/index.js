@@ -25,6 +25,10 @@ app.use(fileUpload()) //permite subir archivos al servidor
 //archivos estaticos
 app.use(express.static(path.join(__dirname,"public")))
 
+app.get("*",(req,res) => {
+	res.sendFile(path.join(__dirname,"public/index.html"))
+})
+
 /*------------ROUTES----------------*/
 app.use("/login",require("./routes/login.routes")) //Login
 app.use("/admin",ensureToken,require("./routes/admin.routes")) //rutas de administrador
