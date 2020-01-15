@@ -13,7 +13,7 @@ function CarouselCard(props){
       </div>
       <img src='/img/person.png'/>
     </div>
-  )
+ )
 }
 
 export default CarouselCard
