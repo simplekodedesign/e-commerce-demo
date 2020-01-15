@@ -153,6 +153,30 @@ header > .navbar{
   color: var(--primary);
 }
 
+.loginButton {
+  position: relative;
+}
+
+.loginForm {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.menuICon {
+  position: relative;
+}
+
+.userMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  color: black;
+}
 /*--------------------------------HOME---------------------------------------*/
 
 section{

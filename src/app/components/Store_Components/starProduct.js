@@ -13,7 +13,7 @@ function StarProduct(){
   }
   
   return(
-    <div class='carousel'>
+    <div className='carousel'>
       <span className="arrow" id="prev" onClick={()=>{carousel(true)}}></span>
       
       <span className="arrow" id="next" onClick={()=>{carousel(true)}}></span>

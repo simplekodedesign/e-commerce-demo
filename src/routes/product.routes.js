@@ -1,6 +1,9 @@
 const {Router} = require("express")
 const router = Router()
 
+//variables de entorno
+require("dotenv").config()
+
 //modules
 const ensureAdmin = require("../modules/ensureAdmin")
 
@@ -42,7 +45,23 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 	//guardar el producto
 	await product.save()
 
-	//guardar las imagenes del producto
+	//guardar las imagenes del producto en el servidor
+
+	//en el servidor
+	for(let key in images){
+		if(images.hasOwnProperty(key)){
+			images[key].mv(process.env.URL_UPLOAD_FILES+images[key].name , err => {
+				if(err) 
+					return res.json({
+						status: -2,
+						message: "Error al cargar las imagenes",
+						err
+					})
+			})
+		}
+	}
+
+	//en la DB
 	const product_id = product._id
 
 	for(let key in images){
@@ -108,6 +127,48 @@ router.post("/delete",ensureAdmin,async (req,res,next) => {
 
 },show_products)
 
+//filtrar productos
+router.post("/filter",async (req,res) => {
+	const {name} = req.body
+
+	if(!name)
+		return res.json({
+			status: -1,
+			message: "Se esperaba el nombre del producto buscado"
+		})
+
+	const products = await Product.find({
+		name: new RegExp(name)
+	})
+
+	const currencies = await Currency.find()
+
+	let images
+	let prices
+	let response
+
+	response = await Promise.all(products.map(async (product) => {
+		images = await Image.find({product_id: product._id},{url: true})
+
+		images = images.map(img => img.url)
+
+		prices = currencies.map(currency => {
+			return {
+				currency: currency.currency,
+				value: currency.value * product.price
+			}
+		})
+
+		return {
+			data: product,
+			images,
+			prices
+		}
+	}))
+
+	res.json(response)
+})
+
 //listar productos
 async function show_products (req,res,next) {
 	const products = await Product.find()
@@ -138,16 +199,5 @@ async function show_products (req,res,next) {
 
 	res.json(response)
 }
-
-//buscar un producto en especifico
-router.post("/find",async (req,res) => {
-	const {product_id} = req.body
-
-	if(!product_id)
-		return res.json({
-			status: -1,
-			message: "Se esperaba el id del producto buscado"
-		})
-})
 
 module.exports = router
