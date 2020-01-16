@@ -9,6 +9,7 @@ import Home from './Home'
 import Store from './Store'
 import Footer from './Footer'
 import AddProduct from './Store_Components/AddProduct'
+import AboutUs from './AboutUs'
 
 function App () {
   const [userInfo, setUserInfo] = useState("")
@@ -50,6 +51,9 @@ function App () {
           <AddProduct
             userInfo={userInfo}
           />
+        </Route>
+        <Route path="/about-us">
+          <AboutUs/>
         </Route>
       </Switch>
       <Footer />

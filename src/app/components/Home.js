@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Link
 } from "react-router-dom";
+import 'lazysizes';
 
 const data = [
   {
@@ -63,7 +64,7 @@ function Home () {
       <section id="Whyus">
         <h2 className="title bold">¿Por qué nosotros?</h2>
         <div className='usCard'>
-          <img src='/img/calidad.svg'/>
+          <img data-src='/img/calidad.svg' className='lazyload'/>
           <div className='usCardtext'>
             <h4>Lorem Ipsum</h4>
             <p>
@@ -72,7 +73,7 @@ function Home () {
           </div>
         </div>
         <div className='usCard'>
-          <img src='/img/usCard.svg'/>
+          <img data-src='/img/usCard.svg' className='lazyload'/>
           <div className='usCardtext'>
             <h4>Lorem Ipsum</h4>
             <p>
@@ -81,7 +82,7 @@ function Home () {
           </div>
         </div>
         <div className='usCard'>
-          <img src='/img/confiebles.svg'/>
+          <img data-src='/img/confiebles.svg' className='lazyload'/>
           <div className='usCardtext'>
             <h4>Lorem Ipsum</h4>
             <p>
@@ -93,10 +94,10 @@ function Home () {
 
       <section id="meetUs">
         <div className="aboutPhoto" id='aboutPhoto'>
-          <img src='/img/people.png'/>
+          <img data-src='/img/people.png' className='lazyload'/>
         </div>
         <div className="aboutPhoto" id='aboutLogo'>
-          <img src='/img/logos/Atomic.png'/>
+          <img data-src='/img/logos/Atomic.png' className='lazyload'/>
         </div>
         <div className="meetText">
           <h2 className="title bold">Conocenos</h2>
