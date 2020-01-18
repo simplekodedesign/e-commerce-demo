@@ -38,7 +38,7 @@ function appearTestimonial (value) {
   } else {
     current = prev - 1
     animation = "bounce right"
-    if(current < 0) current = staticsLength -1
+    if(current < 0) current = staticsLength - 1
   }
 
   for (let i = 0; i < staticsLength; i++) {
