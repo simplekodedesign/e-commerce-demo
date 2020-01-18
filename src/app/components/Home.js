@@ -113,7 +113,7 @@ function Home () {
         </div>
       </section>
 
-      <section id="testimonials">
+      <section id="testimonials" who={active}>
         <h2 className="title bold">Nuestros Clientes</h2>
         <span className="arrow" id="prev" onClick={()=>{testimonialHandler(false)}}></span>
         <CarouselCard idproduct={0} isActive={active} data={data[0]} />

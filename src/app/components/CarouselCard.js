@@ -9,7 +9,7 @@ function CarouselCard(props){
   }
 
   return(
-    <div className={`${props.isActive === props.idproduct ? "Tactive myAnimatable" : "" } testimonial`} my-animation={`bounce ${side}`} onChange={() =>{console.log(this)}}>
+    <div who={props.idproduct} className={`${props.isActive === props.idproduct ? "Tactive" : "" } testimonial staticAnimatable`} my-animation={`bounce ${side}`} onChange={() =>{console.log(this)}}>
       {/* props.isActive === props.idproduct ? animate(this) : null; */}
       <div className="meetText">
         <h4>{props.data.title}</h4>

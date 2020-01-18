@@ -1,5 +1,5 @@
 
-.myAnimatable {
+.myAnimatable, .staticAnimatable{
     --varESA1: 0px;
     --varESA2: 0px;
     transform-style: preserve-3d;
@@ -8,6 +8,11 @@
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
     opacity: 0;
+}
+
+.staticAnimatable {
+    opacity: 1;
+    animation-iteration-count: unset;
 }
 
 [my-animation ~= "bounce"] {

@@ -17,7 +17,6 @@ function animate (data) {
         data.style.setProperty("animation-iteration-count", `${i}`);
         data.style.setProperty("animation-play-state", "running");
     } else {
-
         switch (data.getAttribute("my-animation")) {
             //Fade Simple Animations
     
