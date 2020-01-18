@@ -12,7 +12,7 @@ function Store (props) {
   useEffect(() => {
     setCategory("Alternadores")
 
-    fetch("client/product/", {
+    fetch("/client/product/", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
