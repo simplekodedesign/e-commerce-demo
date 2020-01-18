@@ -1,9 +1,16 @@
-import React, { useState, useEffect} from 'react'
+import React from 'react'
 
 function CarouselCard(props){
+  var side;
+  if(props.isActive >= props.idproduct){
+    side = 'left';
+  }else{
+    side = 'right';
+  }
 
   return(
-    <div className={`${props.isActive === props.idproduct ? "Tactive" : null} testimonial`}>
+    <div className={`${props.isActive === props.idproduct ? "Tactive myAnimatable" : "" } testimonial`} my-animation={`bounce ${side}`} onChange={() =>{console.log(this)}}>
+      {/* props.isActive === props.idproduct ? animate(this) : null; */}
       <div className="meetText">
         <h4>{props.data.title}</h4>
         <i>
@@ -11,7 +18,7 @@ function CarouselCard(props){
         </i>
         <h5>{props.data.name} | {props.data.company}</h5>
       </div>
-      <img src='/img/person.png'/>
+      <img data-src={props.data.image} className='lazyload'/>
     </div>
  )
 }

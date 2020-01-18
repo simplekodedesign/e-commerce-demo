@@ -230,7 +230,7 @@ section{
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
-  width: 30%;
+  width: 35%;
   height: 200px;
   background-color: var(--primary);
   /* color: white; */
@@ -312,15 +312,21 @@ section{
 /*--------------------------Testimonials------------------------------*/
 
 #testimonials{
+  justify-content: space-between;
   align-items: center;
 }
 
 .testimonial{
-  display: none;
+  display: flex;
+  position: absolute;
+  left: 7%;
+  top: 40%;
+  background-color: #131313;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   width: 85%;
+  z-index: -1;
 }
 
 .testimonial > .meetText{
@@ -343,7 +349,7 @@ section{
 }
 
 .Tactive{
-  display: flex;
+  z-index: 1;
 }
 
 .arrow{
@@ -411,9 +417,53 @@ section{
 }
 
 /*--------------------------About us(for work)--------------------------*/
+#aboutUs{
+  min-height: 90vh;
+  align-items: flex-start;
+}
 
-#location{
-  
+#aboutUs > p{
+  max-width: 60ch;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+}
+
+/*----------------Brand-------------------*/
+
+#Brands{
+  min-height: 150vh;
+}
+
+.Distribuidor{
+  min-width: 300px;
+  width: 40%
+}
+
+/*----------------History-------------------*/
+
+#History > img{
+  min-width: 300px;
+  width: 50%;
+  max-width: 500px;
+}
+
+#History > p{
+  width: 40%;
+  max-width: 60ch;
+  color: white;
+}
+
+/*----------------Location-------------------*/
+
+
+#Location > iframe{
+  min-width: 300px;
+  min-height: 500px;
+  width: 50%;
+  height: 70%;
+  max-height: 600px;
+  animation-duration: 1s;
 }
 
 

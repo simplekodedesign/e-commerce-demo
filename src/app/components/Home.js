@@ -11,19 +11,22 @@ const data = [
     title: "Gran atención",
     text: "Uranx is great, it solves all my problems Uranx is great, it solves all my problems Uranx is great, it solves all my problems",
     name: "Jhon Doe",
-    company: "Simple Kode Design"
+    company: "Simple Kode Design",
+    image: '/img/person.png'
   },
   {
     title: "Not only for competitions",
     text: "this is amazing",
     name: "Jhon Doe",
-    company: "Simple Kode Design"
+    company: "Simple Kode Design",
+    image: '/img/person.png'
   },
   {
     title: "Great alternators",
     text: "this is amazing",
     name: "Jhon Doe",
-    company: "Name of the company"
+    company: "Name of the company",
+    image: '/img/person.png'
   }
 ]
 
@@ -46,12 +49,12 @@ function Home () {
         <div>
           <h1>Lorem Ipsum</h1>
           <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, accusamus atque itaque
-           aspernatur deserunt tenetur nisi
-           voluptate ex ut porro a iusto eveniet magnam! Soluta voluptate voluptas enim in cumque.
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, accusamus atque
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, accusamus atque itaque
+            aspernatur deserunt tenetur nisi
+            voluptate ex ut porro a iusto eveniet magnam! Soluta voluptate voluptas enim in cumque.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, accusamus atque
             itaque aspernatur deserunt tenetur nisi voluptate 
-           ex ut porro a iusto eveniet magnam! Soluta voluptate voluptas enim in cumque.
+            ex ut porro a iusto eveniet magnam! Soluta voluptate voluptas enim in cumque.
           </p>
         </div>
       </section>
@@ -63,7 +66,7 @@ function Home () {
 
       <section id="Whyus">
         <h2 className="title bold">¿Por qué nosotros?</h2>
-        <div className='usCard'>
+        <div className='usCard myAnimatable' my-animation="fade left">
           <img data-src='/img/calidad.svg' className='lazyload'/>
           <div className='usCardtext'>
             <h4>Lorem Ipsum</h4>
@@ -72,7 +75,7 @@ function Home () {
             </p>
           </div>
         </div>
-        <div className='usCard'>
+        <div className='usCard myAnimatable' my-animation="fade right">
           <img data-src='/img/usCard.svg' className='lazyload'/>
           <div className='usCardtext'>
             <h4>Lorem Ipsum</h4>
@@ -81,7 +84,7 @@ function Home () {
             </p>
           </div>
         </div>
-        <div className='usCard'>
+        <div className='usCard myAnimatable' my-animation="fade bottom">
           <img data-src='/img/confiebles.svg' className='lazyload'/>
           <div className='usCardtext'>
             <h4>Lorem Ipsum</h4>
@@ -94,10 +97,10 @@ function Home () {
 
       <section id="meetUs">
         <div className="aboutPhoto" id='aboutPhoto'>
-          <img data-src='/img/people.png' className='lazyload'/>
+          <img data-src='/img/people.png' className='lazyload myAnimatable' my-animation="fade left"/>
         </div>
         <div className="aboutPhoto" id='aboutLogo'>
-          <img data-src='/img/logos/Atomic.png' className='lazyload'/>
+          <img data-src='/img/logos/Atomic.png' className='lazyload myAnimatable' my-animation="fade left"/>
         </div>
         <div className="meetText">
           <h2 className="title bold">Conocenos</h2>
