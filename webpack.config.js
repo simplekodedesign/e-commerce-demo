@@ -1,22 +1,12 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+const path = require("path")
 
 module.exports = {
 	entry: "./src/app/index.js",
 	output: {
-		path: __dirname + "/src/public",
-		filename: "bundle.js"
+		path: path.join(__dirname,"/src/public"),
+		filename: "bundle.js",
+		publicPath: "/"
 	},
-	plugins: [
-		new HtmlWebpackPlugin({  
-		  filename: 'index.html',
-		  template: './src/public/template/index.template.html',
-		  hash: true
-		}),
-		new MiniCSSExtractPlugin({
-			filename: "main.css"
-		})
-	],
 	module: {
 		rules: [
 			{
@@ -26,11 +16,11 @@ module.exports = {
 			},
 			{ 
 				test: /\.css$/, 
-				loader: [
-				  MiniCSSExtractPlugin.loader,
-				  "css-loader"
-				]
+				use: ["style-loader","css-loader"]
 			}
 		]
+	},
+	devServer: {
+		historyApiFallback: true
 	}
 }
