@@ -20,7 +20,7 @@ function Header (props) {
 
   return (
     <header>
-      <Link className="headerLogo" to="/"><img src="./img/logos/Uranx.png" alt="logo" /></Link>
+      <Link className="headerLogo" to="/"><img src="./img/logos/Uranx.png" alt="Uranx" /></Link>
       <div className="navbar">
         <Link  to="/">Inicio</Link>
         <Link to="/store">Catalogo</Link>

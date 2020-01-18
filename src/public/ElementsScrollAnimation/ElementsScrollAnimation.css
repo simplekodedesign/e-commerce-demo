@@ -1,0 +1,119 @@
+
+.myAnimatable {
+    --varESA1: 0px;
+    --varESA2: 0px;
+    transform-style: preserve-3d;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    opacity: 0;
+}
+
+[my-animation ~= "bounce"] {
+    animation-timing-function: cubic-bezier(.57,-0.68,.47,1.86);
+}
+
+@keyframes animationReset {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes myTest {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes animations {
+    0% {
+        transform: translate(var(--varESA1), var(--varESA2));
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0px, 0px);
+    }
+}
+
+@keyframes rotateAnimations {
+    0% {
+        transform: var(--varESA1);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes clipPathAnimationsX {
+    0% {
+        transform: rotate(15deg);
+        opacity: 1;
+    }
+
+    16.5% {
+        transform: rotate(-15deg);
+    }
+
+    33% {
+        transform: rotate(0deg);
+    }
+
+    40% {
+        clip-path: inset(40% 40% 40% 40%);
+    }
+
+    66% {
+        clip-path: inset(0% 40% 0% 40%);
+    }
+
+    100% {
+        clip-path: inset(0% 0% 0% 0%);
+        opacity: 1;
+    }
+}
+
+@keyframes clipPathAnimationsY {
+    0% {
+        transform: rotate(15deg);
+        opacity: 1;
+    }
+
+    16.5% {
+        transform: rotate(-15deg);
+    }
+
+    33% {
+        transform: rotate(0deg);
+    }
+
+    40% {
+        clip-path: inset(40% 40% 40% 40%);
+    }
+
+    66% {
+        clip-path: inset(40% 0% 40% 0%);
+    }
+
+    100% {
+        clip-path: inset(0% 0% 0% 0%);
+        opacity: 1;
+    }
+}
