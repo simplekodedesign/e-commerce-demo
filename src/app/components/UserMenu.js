@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 
 function UserMenu (props) {
   const [hide, setHide] = useState(true)
@@ -12,7 +16,7 @@ function UserMenu (props) {
           <li>Car</li>
           <li>Account settings</li>
           <hr />
-          <li>Add Product</li>
+          <li><Link to="/Product/Add">Add Product</Link></li>
           <li>Add Currency</li>
           <li>Add User Admin</li>
         </ul>

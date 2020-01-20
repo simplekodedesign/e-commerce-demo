@@ -147,14 +147,20 @@ header > .navbar{
 .navbar > a{
   color: black;
   min-height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 10px 15px;
 }
 
-.navbar > a:hover{
+.navbar > a:hover, .loginButton:hover > span {
   color: var(--primary);
 }
 
 .loginButton {
   position: relative;
+  padding: 10px 15px;
 }
 
 .loginForm {
@@ -164,6 +170,16 @@ header > .navbar{
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  padding: 25px;
+  background-color: lightgreen;
+}
+
+.loginIput {
+  margin: 10px 0;
+}
+
+.loginForm > button {
+  margin: 10px 0;
 }
 
 .menuICon {
@@ -177,6 +193,25 @@ header > .navbar{
   background-color: white;
   color: black;
 }
+
+/*---------------------------------Signup-------------------------------------*/
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.submitForm > input, .submitForm > button {
+  margin: 10px;
+}
+
 /*--------------------------------HOME---------------------------------------*/
 
 section{

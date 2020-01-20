@@ -11,6 +11,7 @@ import Footer from './Footer'
 import AddProduct from './Store_Components/AddProduct'
 import Product from './Store_Components/Product'
 import AboutUs from './AboutUs'
+import Signup from './Signup'
 
 function App () {
   const [userInfo, setUserInfo] = useState("")
@@ -33,8 +34,14 @@ function App () {
     .then(res => setUserInfo(res))
   }
 
+  function newRegularUser (data) {
+    console.log("You're adding a new user")
+    console.log(data)
+  }
+
   function logOut () {
     setUserInfo({})
+    window.location="/"
   }
 
   return (
@@ -63,7 +70,10 @@ function App () {
           />
         </Route>
         <Route path="/about-us">
-          <AboutUs/>
+          <AboutUs />
+        </Route>
+        <Route path="/signup">
+          <Signup addUser={newRegularUser} />
         </Route>
       </Switch>
       <Footer />

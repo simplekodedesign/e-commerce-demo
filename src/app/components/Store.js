@@ -12,6 +12,10 @@ function Store (props) {
   useEffect(() => {
     setCategory("Alternadores")
 
+    bringProducts()
+  }, [])
+
+  function bringProducts () {
     fetch("/client/product/", {
       method: 'GET',
       headers: {
@@ -20,20 +24,38 @@ function Store (props) {
     })
     .then(response => response.json())
     .then(res => {
-      console.log(res)
       setData(res)
     })
-  }, [])
+  }
 
-  function findProduct (data) {
-    console.log("You're looking for: " + data)
+  function filterProduct (data) {
+    if(data !== "") {
+      const body = JSON.stringify({
+        name: data
+      })
+  
+      fetch("/client/product/filter", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: body
+      })
+      .then(response => response.json())
+      .then(res => {
+        console.log(res)
+        setData(res)
+      })
+    } else {
+      bringProducts()
+    }
   }
 
   return (
     <div className="store">
       <StarProduct />
       <Nav_Bar  
-        findProduct={findProduct}
+        filterProduct={filterProduct}
         message={message}
       />
       <Products_Board

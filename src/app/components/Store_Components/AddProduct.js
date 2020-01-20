@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 function AddProduct (props) {
   const [info, setInfo] = useState({
@@ -8,10 +8,7 @@ function AddProduct (props) {
     price: 0
   })
 
-  useEffect(() => {
-    
-  }, [])
-
+  const [files, setFiles] = useState()
 
   function handleInputChange (e) {
     let {name, value} = e.target
@@ -30,17 +27,35 @@ function AddProduct (props) {
   function handleSubmit (e) {
     e.preventDefault()
 
-    const body = JSON.stringify(info)
+    let data = new FormData()
 
-    console.log(body)
+    console.log(data)
+    
+    for (const key in info) {
+      if (info.hasOwnProperty(key)) {
+        const element = info[key];
+        data.append(key, element)
+      }
+    }
+
+    const FILESLENGTH = files.length
+
+    for (let i = 0; i < FILESLENGTH; i++) {
+      data.append("file" + i, files.item(i))
+    }
+
+    for (const pair of data.entries()) {
+      console.log(pair)
+    }
+
+    const body = JSON.stringify(info)
 
     fetch("/admin/product/add", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        authorization: "bearer " + props.token
+        authorization: "bearer " + props.userInfo.token
       },
-      body: body
+      body: data,
     })
     .then(response => {
       console.log(response)
@@ -52,7 +67,8 @@ function AddProduct (props) {
   }
 
   function handleFilesChange (e) {
-    console.log(e.target.value)
+    const FILES = e.target.files
+    setFiles(FILES)
   }
 
   return (
@@ -115,6 +131,7 @@ function AddProduct (props) {
                 multiple
                 type="file"
                 name="price"
+                accept="image/*"
                 onChange={handleFilesChange}
                 onInput={handleFilesChange}
               />

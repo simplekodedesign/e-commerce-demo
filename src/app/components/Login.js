@@ -34,12 +34,14 @@ function Login (props) {
       <span onClick={() => formHider()}>Login</span>
       {
         !hide && <form onSubmit={handleSubmit} className="loginForm">
+          <h3>Login</h3>
           <input
             type="text"
             value={user.email}
             name="email"
             placeholder="Email"
             onChange={handleInputChange}
+            className="loginIput"
           />
 
           <input
@@ -48,6 +50,7 @@ function Login (props) {
             name="password"
             placeholder="Password"
             onChange={handleInputChange}
+            className="loginIput"
           />
 
           <button>LOGIN!</button>

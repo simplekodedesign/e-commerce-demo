@@ -22,11 +22,11 @@ function Header (props) {
     <header>
       <Link className="headerLogo" to="/"><img src="./img/logos/Uranx.png" alt="Uranx" /></Link>
       <div className="navbar">
-        <Link  to="/">Inicio</Link>
+        <Link to="/">Inicio</Link>
         <Link to="/store">Catalogo</Link>
         <Link to="/about-us">Nosotros</Link>
-        <Link to="/Product/Add">Add Product</Link>
         {!props.userInfo.auth && <Login submitUser={props.loginUser} />}
+        {!props.userInfo.auth && <Link to="/signup">Signup</Link>}
         {props.userInfo.auth && menu}
       </div>
     </header>

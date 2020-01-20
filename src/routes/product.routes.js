@@ -15,24 +15,25 @@ const User = require("../models/User")
 
 //registrar producto
 router.post("/add",ensureAdmin,async (req,res,next) => {
+	console.log(req.files)
 	const {name,description,quantity,price} = req.body
 	const images = req.files
 	let img
 
-	//validar los datos necesarios  VERSION FINAL
-	// if(!name || !description || !quantity || !price || !images)
-	// 	return res.json({
-	// 		status: -1,
-	// 		message: "Debe rellenar todos los campos"
-	// 	})
+	// Validar los datos necesarios  VERSION FINAL
+	if(!name || !description || !quantity || !price || !images)
+		return res.json({
+			status: -1,
+			message: "Debe rellenar todos los campos"
+		})
 
 	// Versión de prueba
 
-	if(!name || !description || !quantity || !price)
-	return res.json({
-		status: -1,
-		message: "Debe rellenar todos los campos"
-	})
+	// if(!name || !description || !quantity || !price)
+	// return res.json({
+	// 	status: -1,
+	// 	message: "Debe rellenar todos los campos"
+	// })
 
 	//crear el objeto producto
 	const product = new Product({

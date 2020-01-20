@@ -3,14 +3,9 @@ import React, { useState } from 'react'
 function Search_Bar (props) {
   const [inputValue, setInputValue] = useState("")
 
-  // useEffect (() => {
-
-  // }, [])
-
-
   function search (e) {
     e.preventDefault()
-    props.findProduct(inputValue)
+    props.filterProduct(inputValue)
   }
 
   function handleInputChange (e) {

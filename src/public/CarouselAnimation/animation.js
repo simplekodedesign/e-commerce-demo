@@ -28,7 +28,8 @@ function pauseAnimation () {
   this.style.setProperty("animation-play-state", "paused")
 }
 
-function appearTestimonial (value) {  
+function appearTestimonial (value) {
+  console.log("It's happening") 
   const prev = parseInt(testimonials.getAttribute("who"))
   let current, animation
   if(value) {
