@@ -72,7 +72,7 @@ function AddProduct (props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       <table>
         <tbody>
           <tr>
