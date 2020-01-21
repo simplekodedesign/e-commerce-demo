@@ -16,7 +16,13 @@ function Product (props) {
   }
 
   return (
-    <Link  to="/Product/" onClick={handleLinkClick}>
+    <Link
+      to={{
+        pathname: "/Product/",
+        search: "?id=" + props.info.data._id
+      }}
+      onClick={handleLinkClick}
+    >
       <div className="product">
         <img alt="Product Image" src="./img/Alternador1.png" />
         <div className="product_info">
