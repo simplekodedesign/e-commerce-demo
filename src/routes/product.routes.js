@@ -170,6 +170,46 @@ router.post("/filter",async (req,res) => {
 	res.json(response)
 })
 
+//buscar un producto por id
+router.post("/find",async (req,res) => {
+	const {id} = req.body
+
+	if(!id)
+		return res.json({
+			status: -1,
+			message: "Se esperaba el id del producto buscado"
+		})
+
+	let product
+
+	try{
+		product = await Product.findOne({_id: id})
+	}catch(e){
+		return res.json({
+			status: -2,
+			message: "No se encontro el producto solicitado"
+		})
+	}		
+
+	const currencies = await Currency.find()
+
+	const images = await Image.find({product_id: id},{url: true})
+
+	const prices = await Promise.all(currencies.map(currency => {
+						return {
+							currency: currency.currency,
+							value: currency.value * product.price
+						}
+					}))
+
+	res.json({
+		data: product,
+		images,
+		prices
+	}) 
+
+})
+
 //listar productos
 async function show_products (req,res,next) {
 	const products = await Product.find()
