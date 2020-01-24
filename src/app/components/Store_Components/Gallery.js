@@ -5,28 +5,36 @@ function Gallery (props) {
   const [selected, setSelected] = useState()
 
   useEffect(() => {
-    console.log(props.images);
-    
     if(props.images[0]) {
-      const imagesArray = props.images.map((item, index) => {
-        const alt = "Imagen de producto " + index
-        return (
-          <img 
-            src={item.url}
-            key={index}
-            onMouseEnter={handleHover}
-            alt={alt}
-          />
-        )
-      })
-      setImages(imagesArray)
-      setSelected(props.images[0].url)
+      const url = props.images[0].url
+      const alt = "Imagen de producto 0"
+      focusImage(alt)
+      setSelected(url)
     }
   }, [props])
 
   function handleHover (e) {
-    const { src } = e.target
+    const { src, alt } = e.target
+    focusImage(alt)
     setSelected(src)
+  }
+
+  function focusImage (altFocus) {
+    const imagesArray = props.images.map((item, index) => {
+
+      const alt = "Imagen de producto " + index
+      const className = altFocus === alt ? "focus" : "unfocus"
+      return (
+        <img 
+          src={item.url}
+          key={index}
+          onMouseEnter={handleHover}
+          alt={alt}
+          className={className}
+        />
+      )
+    })
+    setImages(imagesArray) 
   }
 
   return (

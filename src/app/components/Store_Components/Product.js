@@ -12,37 +12,40 @@ function Product (props) {
   let prices
 
   useEffect (() => {
-    if(props.product.data) {
-      setInfo(() => {
-        prices = createArrayPrice(props.product.prices)
-        setImages(props.product.images)
-        return props.product
-      })
-    } else {
-      const params = QueryString.parse(window.location.search)
 
-      const body = JSON.stringify({
-        id: params.product_id
+    // NEED TO BE TESTED AND CHANGE DATA FROM SERVER BECAUSE OF IMAGES
+    // if(props.product.data) {
+    //   console.log(props.product.data)
+    //   setInfo(() => {
+    //     prices = createArrayPrice(props.product.prices)
+    //     setImages(props.product.images)
+    //     return props.product
+    //   })
+    // } else {
+    // }
+    const params = QueryString.parse(window.location.search)
+
+    const body = JSON.stringify({
+      id: params.product_id
+    })
+    
+    fetch("/client/product/find", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    })
+    .then(response => response.json())
+    .then(res => {
+      console.log(res)
+      setInfo(() => {
+        prices = createArrayPrice(res.prices)
+        setImages(res.images)
+        return res
       })
-      
-      fetch("/client/product/find", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: body
-      })
-      .then(response => response.json())
-      .then(res => {
-        console.log(res)
-        setInfo(() => {
-          prices = createArrayPrice(res.prices)
-          setImages(res.images)
-          return res
-        })
-      })
-      .catch(err => console.log(err))
-    }
+    })
+    .catch(err => console.log(err))
   }, [props])
 
   function createArrayPrice (data) {

@@ -525,6 +525,14 @@ section{
   margin: 0 7px;
 }
 
+.focus {
+  opacity: 1;
+}
+
+.unfocus {
+  opacity: .5;
+}
+
 /*--------------------------About us(for work)--------------------------*/
 #aboutUs{
   min-height: 90vh;
