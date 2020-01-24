@@ -4,40 +4,40 @@ import Gallery from './Gallery'
 import ScrollToTop from '../ScrollToTop'
 
 function Product (props) {
-  const [, setInfo] = useState()
-  const [images, setImages] = useState([
-    "../img/Alternador1.png",
-    "../img/Alternador2.png",
-    "../img/Alternador1.png",
-    "../img/Alternador2.png"
-  ])
+  const [info, setInfo] = useState({
+    data: {}
+  })
+  const [images, setImages] = useState([])
 
   let prices
 
   useEffect (() => {
-    console.log(props)
-    if(props.product) {
+    if(props.product.data) {
       setInfo(() => {
         prices = createArrayPrice(props.product.prices)
+        setImages(props.product.images)
         return props.product
       })
     } else {
       const params = QueryString.parse(window.location.search)
-      console.log("Ups!!!")
+
+      const body = JSON.stringify({
+        id: params.product_id
+      })
       
-      fetch("", {
-        method: 'GET',
+      fetch("/client/product/find", {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: {
-          id: params.product_id
-        }
+        body: body
       })
       .then(response => response.json())
       .then(res => {
+        console.log(res)
         setInfo(() => {
           prices = createArrayPrice(res.prices)
+          setImages(res.images)
           return res
         })
       })
@@ -63,8 +63,8 @@ function Product (props) {
       <div className="mainInfoProduct">
         <Gallery images={images} />
         <div className="product_info">
-          <h1 className="title bold">{ props.product.data.name }</h1>
-          <h3>{ props.product.data.description }</h3>
+          <h1 className="title bold">{ info.data.name }</h1>
+          <h3>{ info.data.description }</h3>
 
           <div className="prices">
             {prices}

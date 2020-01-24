@@ -64,7 +64,7 @@ function App () {
             userInfo={userInfo}
           />
         </Route>
-        <Route path="/Product/">
+        <Route path="/Product">
           <Product
             product={product}
           />

@@ -473,7 +473,7 @@ section{
   width: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 550px;
 }
@@ -516,11 +516,13 @@ section{
 .mainImage > img {
   height: 85%;
   width: auto;
+  max-width: 100%;
 }
 
 .imagesColumn > img {
   height: 100px;
   width: 100px;
+  margin: 0 7px;
 }
 
 /*--------------------------About us(for work)--------------------------*/

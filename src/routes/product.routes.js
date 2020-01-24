@@ -69,7 +69,7 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 		if(images.hasOwnProperty(key)){
 			img = new Image({
 				product_id,
-				url: "img/"+images[key].name
+				url: "img/img_products/"+images[key].name
 			})
 			await img.save()
 		}
@@ -196,11 +196,11 @@ router.post("/find",async (req,res) => {
 	const images = await Image.find({product_id: id},{url: true})
 
 	const prices = await Promise.all(currencies.map(currency => {
-						return {
-							currency: currency.currency,
-							value: currency.value * product.price
-						}
-					}))
+		return {
+			currency: currency.currency,
+			value: currency.value * product.price
+		}
+	}))
 
 	res.json({
 		data: product,

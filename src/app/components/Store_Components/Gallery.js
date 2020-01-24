@@ -5,12 +5,14 @@ function Gallery (props) {
   const [selected, setSelected] = useState()
 
   useEffect(() => {
-    if(props.images) {
+    console.log(props.images);
+    
+    if(props.images[0]) {
       const imagesArray = props.images.map((item, index) => {
         const alt = "Imagen de producto " + index
         return (
           <img 
-            src={item}
+            src={item.url}
             key={index}
             onMouseEnter={handleHover}
             alt={alt}
@@ -18,9 +20,9 @@ function Gallery (props) {
         )
       })
       setImages(imagesArray)
-      setSelected(props.images[0])
+      setSelected(props.images[0].url)
     }
-  }, [])
+  }, [props])
 
   function handleHover (e) {
     const { src } = e.target

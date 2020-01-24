@@ -8,7 +8,7 @@ function Product (props) {
   // const [info, setInfo] = useState({})
 
   useEffect(() => {
-    
+    console.log(props)
   }, [])
 
   function handleLinkClick (e) {
@@ -18,13 +18,13 @@ function Product (props) {
   return (
     <Link
       to={{
-        pathname: "/Product/",
+        pathname: "/Product",
         search: "?product_id=" + props.info.data._id
       }}
       onClick={handleLinkClick}
     >
       <div className="product">
-        <img alt="Product Image" src="./img/Alternador1.png" />
+        <img alt="Product Image" src={props.info.images[0]} />
         <div className="product_info">
           <h3>{ props.info.data.name }</h3>
           <p>{ props.info.data.description }</p>
