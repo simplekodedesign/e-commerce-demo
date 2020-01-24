@@ -5,6 +5,7 @@ import {
   Link
 } from "react-router-dom";
 import 'lazysizes';
+import ScrollToTop from './ScrollToTop'
 
 const data = [
   {
@@ -121,6 +122,7 @@ function Home () {
         <CarouselCard idproduct={2} isActive={active} data={data[2]} />
         <span className="arrow" id="next" onClick={()=>{testimonialHandler(true)}}></span>
       </section>
+      <ScrollToTop />
     </div>
   )
 }

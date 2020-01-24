@@ -19,7 +19,7 @@ function Product (props) {
     <Link
       to={{
         pathname: "/Product/",
-        search: "?id=" + props.info.data._id
+        search: "?product_id=" + props.info.data._id
       }}
       onClick={handleLinkClick}
     >

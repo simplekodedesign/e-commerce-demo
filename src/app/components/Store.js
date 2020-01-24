@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Products_Board from './Store_Components/Products_Board'
 import Nav_Bar from './Store_Components/Nav_Bar'
 import StarProduct from './Store_Components/starProduct'
+import ScrollToTop from './ScrollToTop'
 
 function Store (props) {
   const [, setCategory] = useState("")
@@ -62,6 +63,7 @@ function Store (props) {
         products={data}
         setProduct={props.setProduct}
       />
+      <ScrollToTop />
     </div>
   )
 }
