@@ -164,6 +164,10 @@ header > .navbar{
   padding: 10px 15px;
 }
 
+.loginButton > span {
+  cursor: pointer;
+}
+
 .loginForm {
   position: absolute;
   top: 100%;
@@ -171,16 +175,47 @@ header > .navbar{
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  padding: 25px;
-  background-color: lightgreen;
+  align-items: center;
+  padding: 25px 40px;
+  background-color: white;
 }
 
-.loginIput {
+.loginForm > .loginIput {
+  border: 1px solid var(--secondary);
+  border-radius: 4px;
+  padding: 2px;
   margin: 10px 0;
+  width: 200px;
+  height: 25px;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
-.loginForm > button {
-  margin: 10px 0;
+.loginIput > input {
+  background: none;
+  border: none;
+}
+
+.loginIput > img {
+  height: 100%;
+  width: auto;
+}
+
+.loginButtons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.loginForm > span {
+  margin-top: -5px;
+  margin-bottom: 5px;
+  font-size: 75%;
+  cursor: pointer;
+  align-self: flex-start;
 }
 
 .menuICon {

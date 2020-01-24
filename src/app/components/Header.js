@@ -26,7 +26,6 @@ function Header (props) {
         <Link to="/store">Catalogo</Link>
         <Link to="/about-us">Nosotros</Link>
         {!props.userInfo.auth && <Login submitUser={props.loginUser} />}
-        {!props.userInfo.auth && <Link to="/signup">Signup</Link>}
         {props.userInfo.auth && menu}
       </div>
     </header>

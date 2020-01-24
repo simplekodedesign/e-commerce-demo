@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 
 function Login (props) {
   const [user, setUser] = useState({
@@ -33,27 +37,39 @@ function Login (props) {
     <div className="loginButton">
       <span onClick={() => formHider()}>Login</span>
       {
-        !hide && <form onSubmit={handleSubmit} className="loginForm">
-          <h3>Login</h3>
-          <input
-            type="text"
-            value={user.email}
-            name="email"
-            placeholder="Email"
-            onChange={handleInputChange}
-            className="loginIput"
-          />
+        !hide &&
+        <form onSubmit={handleSubmit} className="loginForm">
+          <h3>Iniciar sesión</h3>
+          <div className="loginIput">
+            <img src="./img/usuario.svg" alt="user" />
+            <input
+              type="text"
+              value={user.email}
+              name="email"
+              placeholder="Email"
+              onChange={handleInputChange}
+            />
+          </div>
 
-          <input
-            type="password"
-            value={user.password}
-            name="password"
-            placeholder="Password"
-            onChange={handleInputChange}
-            className="loginIput"
-          />
+          <div className="loginIput">
+          <img src="./img/contraseña.svg" alt="password" />
+            <input
+              type="password"
+              value={user.password}
+              name="password"
+              placeholder="Password"
+              onChange={handleInputChange}
+            />
+          </div>
 
-          <button>LOGIN!</button>
+          <span>¿Ha olvidado su contraseña?</span>
+
+          <div className="loginButtons">
+            <Link to="/signup">
+              <span onClick={formHider}>Registro</span>
+            </Link>
+            <button>Entrar</button>
+          </div>
           
         </form>
       }
