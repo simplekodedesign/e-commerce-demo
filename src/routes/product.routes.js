@@ -13,6 +13,14 @@ const Currency = require("../models/Currency")
 const Image = require("../models/Image")
 const User = require("../models/User")
 
+var cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
 //registrar producto
 router.post("/add",ensureAdmin,async (req,res,next) => {
 	console.log(req.files)
@@ -47,31 +55,27 @@ router.post("/add",ensureAdmin,async (req,res,next) => {
 	await product.save()
 
 	//guardar las imagenes del producto en el servidor
-
-	//en el servidor
+	const product_id = product._id
+	let img_urls = []
 	for(let key in images){
 		if(images.hasOwnProperty(key)){
-			images[key].mv(process.env.URL_UPLOAD_FILES+images[key].name , err => {
-				if(err) 
+			cloudinary.uploader.upload(images[key].tempFilePath,{
+				folder: "skd-e-commerce"
+			},async (err,result) => {
+				if(err)
 					return res.json({
 						status: -2,
 						message: "Error al cargar las imagenes",
 						err
 					})
-			})
-		}
-	}
 
-	//en la DB
-	const product_id = product._id
+				img = new Image({
+					product_id,
+					url: result.secure_url
+				})
+				await img.save()
 
-	for(let key in images){
-		if(images.hasOwnProperty(key)){
-			img = new Image({
-				product_id,
-				url: "img/img_products/"+images[key].name
 			})
-			await img.save()
 		}
 	}
 

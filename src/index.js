@@ -20,7 +20,10 @@ app.set("port",process.env.PORT || 3000) //establecer puerto
 //middlewares
 app.use(morgan("dev")) //ver las peticiones al servidor por la consola
 app.use(express.json()) //establecer la forma en como se realiza el intercambio de datos
-app.use(fileUpload()) //permite subir archivos al servidor
+
+app.use(fileUpload({
+	useTempFiles: true
+})) //permite subir archivos al servidor
 
 //archivos estaticos
 app.use(express.static(path.join(__dirname,"public")))

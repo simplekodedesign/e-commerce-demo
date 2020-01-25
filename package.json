@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "webpack": "webpack -p",
+    "webpack": "webpack --mode development --watch",
     "heroku-postbuild": "webpack -p"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/simplekodedesign/e-commerce-demo#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
