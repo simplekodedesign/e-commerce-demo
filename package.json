@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "webpack": "webpack --mode development --watch"
+    "webpack": "webpack --mode development --watch",
+    "heroku-postbuild": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -42,5 +43,8 @@
     "style-loader": "^1.1.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
+  },
+  "engines": {
+    "node": "12.14.1"
   }
 }
