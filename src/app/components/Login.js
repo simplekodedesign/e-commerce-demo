@@ -66,9 +66,9 @@ function Login (props) {
 
           <div className="loginButtons">
             <Link to="/signup">
-              <span onClick={formHider}>Registro</span>
+              <span className="button reg" onClick={formHider}>Registro</span>
             </Link>
-            <button>Entrar</button>
+            <button className="button">Entrar</button>
           </div>
           
         </form>
