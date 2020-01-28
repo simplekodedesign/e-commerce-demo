@@ -35,8 +35,20 @@ function App () {
   }
 
   function newRegularUser (data) {
-    console.log("You're adding a new user")
-    console.log(data)
+    const body = JSON.stringify(data)
+
+    fetch("/login/signup", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body : body
+    })
+    .then(response => response.json())
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
   }
 
   function logOut () {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 
 function Signup (props) {
   const [user, setUser] = useState({
@@ -6,6 +7,8 @@ function Signup (props) {
     password: "",
     confirmPassword: ""
   })
+
+  const [dir, setDir] = useState()
 
   function handleInputChange (e) {
     const {name, value} = e.target
@@ -22,6 +25,7 @@ function Signup (props) {
     e.preventDefault()
     if(user.password === user.confirmPassword) {
       props.addUser(user)
+      setDir(<Redirect to="/" />)
     } else {
       alert("Hay un error en confirmación de contraseña!")
     }
@@ -58,6 +62,7 @@ function Signup (props) {
         <button>Signup</button>
         
       </form>
+      { dir }
     </section>
   )
 }
