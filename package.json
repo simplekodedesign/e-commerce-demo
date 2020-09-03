@@ -26,7 +26,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
     "jsonwebtoken": "^8.5.1",
-    "lazysizes": "^5.2.0",
+    "lazysizes": "^5.2.1",
     "mongoose": "^5.8.7",
     "morgan": "^1.9.1",
     "query-string": "^6.10.1",
